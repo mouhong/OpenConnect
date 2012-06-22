@@ -1,6 +1,10 @@
 # OpenConnect
 
-OpenConnect is a library aimed to provide an abstraction over different OAuth 2.0 based login service providers. It's written in C# and supports Windows Live Connect, QQ Login, Sina Weibo Connect, Renren Connect, etc.
+OpenConnect is a library aimed to provide an abstraction over different OAuth 2.0 based login service providers.
+
+## How to use?
+
+See: https://github.com/mouhong/OpenConnect/wiki
 
 ## Setup sample application:
 
