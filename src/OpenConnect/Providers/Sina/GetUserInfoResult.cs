@@ -28,7 +28,7 @@ namespace OpenConnect.Providers.Weibo
                 Id = id,
                 NickName = screen_name,
                 Gender = gender == "m" ? Gender.Male : Gender.Female,
-                FigureUrl = profile_image_url
+                HeadImageUrl = profile_image_url
             };
         }
     }

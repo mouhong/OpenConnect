@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 
-namespace OpenConnect.Providers.QQ
+namespace OpenConnect.Providers.Tencent.QQ
 {
     [DataContract]
     class GetUserInfoResult
@@ -29,7 +29,7 @@ namespace OpenConnect.Providers.QQ
             return new UserInfo
             {
                 NickName = nickname,
-                FigureUrl = figureurl,
+                HeadImageUrl = figureurl,
                 Gender = gender == "男" ? Gender.Male : Gender.Female
             };
         }

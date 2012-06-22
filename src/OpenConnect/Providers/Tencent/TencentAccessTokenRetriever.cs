@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace OpenConnect.Providers.QQ
+namespace OpenConnect.Providers.Tencent
 {
-    public class QQAccessTokenRetriever : OAuthAccessTokenRetriever
+    public class TencentAccessTokenRetriever : OAuthAccessTokenRetriever
     {
-        public QQAccessTokenRetriever()
-            : base("https://graph.qq.com/oauth2.0/token")
+        public TencentAccessTokenRetriever(string apiPath)
+            : base(apiPath)
         {
         }
 
-        public QQAccessTokenRetriever(IHttpClient httpClient)
-            : base("https://graph.qq.com/oauth2.0/token", httpClient)
+        public TencentAccessTokenRetriever(string apiPath, IHttpClient httpClient)
+            : base(apiPath, httpClient)
         {
         }
 
@@ -25,7 +25,7 @@ namespace OpenConnect.Providers.QQ
             if (!result.IsValid)
                 throw new ApiException("Invalid response when request access token: " + response + ".");
 
-            return new AccessToken(result.Token, startRequestTime.AddSeconds(result.Expires), null);
+            return new AccessToken(result.Token, startRequestTime.AddSeconds(result.Expires), result.RefreshToken);
         }
     }
 }

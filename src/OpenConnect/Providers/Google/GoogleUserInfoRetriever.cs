@@ -23,7 +23,7 @@ namespace OpenConnect.Providers.Google
             HttpClient = httpClient;
         }
 
-        public UserInfo Retrieve(AppInfo appInfo, string accessToken)
+        public UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId)
         {
             var url = UrlBuilder.Create("https://www.googleapis.com/oauth2/v1/userinfo")
                                 .WithParam("alt", "json")
@@ -37,7 +37,7 @@ namespace OpenConnect.Providers.Google
             {
                 Id = result.id,
                 NickName = result.name,
-                FigureUrl = result.picture,
+                HeadImageUrl = result.picture,
                 Gender = result.gender == "male" ? Gender.Male : Gender.Female
             };
         }

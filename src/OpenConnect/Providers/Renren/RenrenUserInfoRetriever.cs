@@ -24,7 +24,7 @@ namespace OpenConnect.Providers.Renren
             HttpClient = httpClient;
         }
 
-        public UserInfo Retrieve(AppInfo appInfo, string accessToken)
+        public UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId)
         {
             var apiPath = "http://api.renren.com/restserver.do";
 
@@ -49,7 +49,7 @@ namespace OpenConnect.Providers.Renren
                 {
                     Id = user.uid,
                     NickName = user.name,
-                    FigureUrl = user.headurl,
+                    HeadImageUrl = user.headurl,
                     Gender = user.sex == "1" ? Gender.Male : Gender.Female
                 };
             }

@@ -24,13 +24,17 @@ namespace OpenConnect.Providers.Weibo
             HttpClient = httpClient;
         }
 
-        public UserInfo Retrieve(AppInfo appInfo, string accessToken)
+        public UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId)
         {
             Require.NotNull(appInfo, "appInfo");
             Require.NotNullOrEmpty(accessToken, "accessToken");
 
-            var uid = GetUserIdentity(accessToken);
-            var userInfo = GetUserInfoByUserIdentity(accessToken, uid);
+            if (String.IsNullOrEmpty(userOpenId))
+            {
+                userOpenId = GetUserIdentity(accessToken);
+            }
+
+            var userInfo = GetUserInfoByUserIdentity(accessToken, userOpenId);
 
             return userInfo;
         }

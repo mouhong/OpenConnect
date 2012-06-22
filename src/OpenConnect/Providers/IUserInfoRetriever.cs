@@ -7,6 +7,6 @@ namespace OpenConnect.Providers
 {
     public interface IUserInfoRetriever
     {
-        UserInfo Retrieve(AppInfo appInfo, string accessToken);
+        UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId);
     }
 }

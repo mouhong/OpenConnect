@@ -23,7 +23,7 @@ namespace OpenConnect.Providers.Live
             HttpClient = httpClient;
         }
 
-        public UserInfo Retrieve(AppInfo appInfo, string accessToken)
+        public UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId)
         {
             var url = UrlBuilder.Create("https://apis.live.net/v5.0/me")
                                 .WithParam("access_token", accessToken)

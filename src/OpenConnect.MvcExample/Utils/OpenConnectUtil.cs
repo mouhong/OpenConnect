@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using OpenConnect.Providers.QQ;
+using OpenConnect.Providers.Tencent.QQ;
 using OpenConnect.Providers.Weibo;
 using OpenConnect.Providers.Renren;
 using OpenConnect.Providers.Live;
 using OpenConnect.Providers.Google;
+using OpenConnect.Providers.Tencent.Weibo;
 
 namespace OpenConnect.MvcExample.Utils
 {
@@ -21,6 +22,10 @@ namespace OpenConnect.MvcExample.Utils
             manager.Add("QQ", new OpenConnectClient(
                 new AppInfo("100238506", "0379c7b5e5f78aa7909f2238d3186893", null, GetRedirectUri("QQ")),
                 new QQOpenConnectProvider()));
+
+            manager.Add("Tencent Weibo", new OpenConnectClient(
+                new AppInfo("801176853", "a8d4c7256c54b2a5be5c414d42ac5d70", "all", GetRedirectUri("Tencent Weibo")),
+                new TencentWeiboOpenConnectProvider()));
 
             manager.Add("Sina Weibo", new OpenConnectClient(
                 new AppInfo("2841977476", "f8abbb8426b825822f81ef80bb648d08", null, GetRedirectUri("Sina Weibo")),

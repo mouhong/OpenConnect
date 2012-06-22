@@ -5,7 +5,7 @@ using System.Text;
 
 using OpenConnect.Utils;
 
-namespace OpenConnect.Providers.QQ
+namespace OpenConnect.Providers.Tencent.QQ
 {
     public class QQUserInfoRetriever : IUserInfoRetriever
     {
@@ -23,13 +23,17 @@ namespace OpenConnect.Providers.QQ
             HttpClient = httpClient;
         }
 
-        public UserInfo Retrieve(AppInfo appInfo, string accessToken)
+        public UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId)
         {
             Require.NotNull(appInfo, "appInfo");
             Require.NotNullOrEmpty(accessToken, "accessToken");
 
-            var uid = GetUserIdentity(accessToken);
-            var userInfo = GetUserInfoByUserIdentity(appInfo, accessToken, uid);
+            if (String.IsNullOrEmpty(userOpenId))
+            {
+                userOpenId = GetUserIdentity(accessToken);
+            }
+
+            var userInfo = GetUserInfoByUserIdentity(appInfo, accessToken, userOpenId);
 
             return userInfo;
         }

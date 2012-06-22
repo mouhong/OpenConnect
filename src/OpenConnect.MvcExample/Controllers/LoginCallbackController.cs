@@ -9,14 +9,14 @@ namespace OpenConnect.MvcExample.Controllers
 {
     public class LoginCallbackController : Controller
     {
-        public ActionResult Success(string clientName, string code)
+        public ActionResult Success(string clientName, string code, string openid = null)
         {
             var client = OpenConnectUtil.ClientManager.Find(clientName);
 
             var state = Guid.NewGuid().ToString("N");
 
             var token = client.GetAccessToken(code, state);
-            var user = client.GetUserInfo(token.Token);
+            var user = client.GetUserInfo(token.Token, openid);
 
             ViewBag.ClientName = clientName;
 

@@ -15,7 +15,7 @@ namespace OpenConnect
 
         public string Email { get; set; }
 
-        public string FigureUrl { get; set; }
+        public string HeadImageUrl { get; set; }
 
         public Gender Gender { get; set; }
 

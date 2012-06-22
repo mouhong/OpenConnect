@@ -41,9 +41,9 @@ namespace OpenConnect
             return _accessTokenRetriever.Refresh(AppInfo, refreshToken);
         }
 
-        public UserInfo GetUserInfo(string accessToken)
+        public UserInfo GetUserInfo(string accessToken, string userOpenId = null)
         {
-            return _userInfoRetriever.Retrieve(AppInfo, accessToken);
+            return _userInfoRetriever.Retrieve(AppInfo, accessToken, userOpenId);
         }
     }
 }
