@@ -11,7 +11,7 @@ namespace OpenConnect.Providers
     public interface IOpenConnectProvider
     {
         /// <summary>
-        /// Gets the <see cref="T:OpenConnect.Providers.ILoginUrlBuilder"/> implementation for builing login url.
+        /// Gets the <see cref="T:OpenConnect.Providers.ILoginUrlBuilder"/> implementation for login url building.
         /// </summary>
         /// <returns></returns>
         ILoginUrlBuilder GetLoginUrlBuilder();
