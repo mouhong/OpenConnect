@@ -24,7 +24,7 @@ namespace OpenConnect
             factory.Register(typeof(LiveOpenConnectProvider).FullName, () => new LiveOpenConnectProvider());
             factory.Register(typeof(QQOpenConnectProvider).FullName, () => new QQOpenConnectProvider());
             factory.Register(typeof(RenrenOpenConnectProvider).FullName, () => new RenrenOpenConnectProvider());
-            factory.Register(typeof(WeiboOpenConnectProvider).FullName, () => new WeiboOpenConnectProvider());
+            factory.Register(typeof(SinaWeiboOpenConnectProvider).FullName, () => new SinaWeiboOpenConnectProvider());
 
             Current = factory;
         }

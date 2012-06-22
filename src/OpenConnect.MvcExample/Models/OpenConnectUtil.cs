@@ -21,7 +21,7 @@ namespace OpenConnect.MvcExample.Models
 
             manager.Add("Sina Weibo", new OpenConnectClient(
                 new AppInfo("2841977476", "f8abbb8426b825822f81ef80bb648d08", null, "http://test.sigcms.com/Account/WeiboLoginSuccess"),
-                new WeiboOpenConnectProvider()));
+                new SinaWeiboOpenConnectProvider()));
 
             ClientManager = manager;
         }

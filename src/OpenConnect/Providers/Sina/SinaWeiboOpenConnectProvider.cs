@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OpenConnect.Providers.Weibo
 {
-    public class WeiboOpenConnectProvider : IOpenConnectProvider
+    public class SinaWeiboOpenConnectProvider : IOpenConnectProvider
     {
         public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
         {
@@ -22,7 +22,7 @@ namespace OpenConnect.Providers.Weibo
 
         public IUserInfoRetriever GetUserInfoRetriever()
         {
-            return new WeiboUserInfoRetriever();
+            return new SinaWeiboUserInfoRetriever();
         }
     }
 }

@@ -8,16 +8,16 @@ using OpenConnect.Utils;
 
 namespace OpenConnect.Providers.Weibo
 {
-    public class WeiboUserInfoRetriever : IUserInfoRetriever
+    public class SinaWeiboUserInfoRetriever : IUserInfoRetriever
     {
         public IHttpClient HttpClient { get; private set; }
 
-        public WeiboUserInfoRetriever()
+        public SinaWeiboUserInfoRetriever()
             : this(OpenConnect.Providers.HttpClient.Instance)
         {
         }
 
-        public WeiboUserInfoRetriever(IHttpClient httpClient)
+        public SinaWeiboUserInfoRetriever(IHttpClient httpClient)
         {
             Require.NotNull(httpClient, "httpClient");
 

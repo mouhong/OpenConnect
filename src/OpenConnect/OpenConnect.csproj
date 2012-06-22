@@ -83,10 +83,10 @@
     <Compile Include="ResponseType.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="Providers\UrlBuilder.cs" />
-    <Compile Include="Providers\Weibo\GetUIDResult.cs" />
-    <Compile Include="Providers\Weibo\GetUserInfoResult.cs" />
-    <Compile Include="Providers\Weibo\WeiboUserInfoRetriever.cs" />
-    <Compile Include="Providers\Weibo\WeiboOpenConnectProvider.cs" />
+    <Compile Include="Providers\Sina\GetUIDResult.cs" />
+    <Compile Include="Providers\Sina\GetUserInfoResult.cs" />
+    <Compile Include="Providers\Sina\SinaWeiboUserInfoRetriever.cs" />
+    <Compile Include="Providers\Sina\SinaWeiboOpenConnectProvider.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
