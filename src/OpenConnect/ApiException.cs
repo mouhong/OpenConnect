@@ -18,7 +18,7 @@ namespace OpenConnect
         }
 
         public ApiException(string message, string errorCode)
-            : base(message + "Error code: " + errorCode + ".")
+            : base(message.EndsWith(".") ? message : message + "." + " Error code: " + errorCode + ".")
         {
             ErrorCode = errorCode;
         }
@@ -29,7 +29,7 @@ namespace OpenConnect
         }
 
         public ApiException(string message, string errorCode, Exception inner)
-            : base(message + "Error code: " + errorCode + ".", inner)
+            : base(message.EndsWith(".") ? message : message + "." + " Error code: " + errorCode + ".", inner)
         {
         }
 

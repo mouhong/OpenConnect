@@ -58,7 +58,7 @@ namespace OpenConnect.Providers.Tencent.Weibo
         {
             get
             {
-                return head;
+                return head + "/100";
             }
         }
 

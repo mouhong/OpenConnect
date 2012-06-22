@@ -74,6 +74,7 @@
     <Content Include="Content\images\connect-qq.png" />
     <Content Include="Content\images\connect-renren.png" />
     <Content Include="Content\images\connect-sina-weibo.png" />
+    <Content Include="Content\images\connect-taobao.png" />
     <Content Include="Content\images\connect-tencent-weibo.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
@@ -105,7 +106,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\LoginCallback\Success.cshtml" />
+    <Content Include="Views\LoginCallback\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenConnect\OpenConnect.csproj">

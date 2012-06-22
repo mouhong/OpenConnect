@@ -8,6 +8,7 @@ using OpenConnect.Providers.Renren;
 using OpenConnect.Providers.Live;
 using OpenConnect.Providers.Google;
 using OpenConnect.Providers.Tencent.Weibo;
+using OpenConnect.Providers.Taobao;
 
 namespace OpenConnect.MvcExample.Utils
 {
@@ -43,12 +44,16 @@ namespace OpenConnect.MvcExample.Utils
                 new AppInfo("352501794367.apps.googleusercontent.com", "lQ8ShnALbvYfM0lbQ0vUzLCv", "https://www.googleapis.com/auth/userinfo.profile", GetRedirectUri("Google")),
                 new GoogleOpenConnectProvider()));
 
+            manager.Add("Taobao", new OpenConnectClient(
+                new AppInfo("12412746", "0a5fc2c8beef294900e1fcf7bda46af2", null, GetRedirectUri("Taobao")),
+                new TaobaoOpenConnectProvider()));
+
             ClientManager = manager;
         }
 
         static string GetRedirectUri(string clientName)
         {
-            return "http://test.sigcms.com/LoginCallback/Success?clientName=" + clientName;
+            return "http://test.sigcms.com/LoginCallback?clientName=" + clientName;
         }
     }
 }

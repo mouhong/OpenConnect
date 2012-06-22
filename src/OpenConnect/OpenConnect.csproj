@@ -61,6 +61,16 @@
     <Compile Include="Providers\IGetUserInfoRequest.cs" />
     <Compile Include="OpenConnectClient.cs" />
     <Compile Include="Providers\Renren\RenrenUserInfo.cs" />
+    <Compile Include="Providers\Taobao\ErrorResponse.cs" />
+    <Compile Include="Providers\Taobao\GetUserInfoApiResponse.cs" />
+    <Compile Include="Providers\Taobao\UserGetResponse.cs" />
+    <Compile Include="Providers\Taobao\Location.cs" />
+    <Compile Include="Providers\Taobao\TaobaoApiUtil.cs" />
+    <Compile Include="Providers\Taobao\TaobaoGetUserInfoRequest.cs" />
+    <Compile Include="Providers\Taobao\TaobaoOpenConnectProvider.cs" />
+    <Compile Include="Providers\Taobao\TaobaoUserInfo.cs" />
+    <Compile Include="Providers\Taobao\UserCredit.cs" />
+    <Compile Include="Providers\Taobao\UserStatus.cs" />
     <Compile Include="Providers\Tencent\QQ\QQGetUserInfoRequest.cs" />
     <Compile Include="Providers\HttpClient.cs" />
     <Compile Include="ApiException.cs" />
@@ -85,6 +95,7 @@
     <Compile Include="Providers\Sina\SinaWeiboUserInfo.cs" />
     <Compile Include="Providers\Sina\SinaWeiboGetUserInfoRequest.cs" />
     <Compile Include="Providers\Sina\SinaWeiboOpenConnectProvider.cs" />
+    <Compile Include="Utils\Md5Encryptor.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
