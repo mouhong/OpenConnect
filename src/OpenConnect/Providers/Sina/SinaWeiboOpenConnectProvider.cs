@@ -9,12 +9,12 @@ namespace OpenConnect.Providers.Weibo
     {
         public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
         {
-            return new StandardAuthorizationUrlBuilder("https://api.weibo.com/oauth2/authorize");
+            return new OAuthAuthorizationUrlBuilder("https://api.weibo.com/oauth2/authorize");
         }
 
         public IAccessTokenRetriever GetAccessTokenRetriever()
         {
-            return new StandardAccessTokenRetriever("https://api.weibo.com/oauth2/access_token")
+            return new OAuthAccessTokenRetriever("https://api.weibo.com/oauth2/access_token")
             {
                 Method = HttpMethod.Post
             };

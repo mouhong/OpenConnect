@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace OpenConnect.Providers.QQ
 {
-    public class QQAccessTokenRetriever : StandardAccessTokenRetriever
+    public class QQAccessTokenRetriever : OAuthAccessTokenRetriever
     {
         public QQAccessTokenRetriever()
             : base("https://graph.qq.com/oauth2.0/token")

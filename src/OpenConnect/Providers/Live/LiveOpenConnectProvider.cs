@@ -9,12 +9,12 @@ namespace OpenConnect.Providers.Live
     {
         public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
         {
-            return new StandardAuthorizationUrlBuilder("https://oauth.live.com/authorize");
+            return new OAuthAuthorizationUrlBuilder("https://oauth.live.com/authorize");
         }
 
         public IAccessTokenRetriever GetAccessTokenRetriever()
         {
-            return new StandardAccessTokenRetriever("https://oauth.live.com/token")
+            return new OAuthAccessTokenRetriever("https://oauth.live.com/token")
             {
                 Method = HttpMethod.Get
             };

@@ -9,6 +9,14 @@ namespace OpenConnect
     {
         private Dictionary<string, OpenConnectClient> _clients = new Dictionary<string, OpenConnectClient>();
 
+        public IEnumerable<string> ClientNames
+        {
+            get
+            {
+                return _clients.Keys;
+            }
+        }
+
         public IEnumerable<OpenConnectClient> Clients
         {
             get

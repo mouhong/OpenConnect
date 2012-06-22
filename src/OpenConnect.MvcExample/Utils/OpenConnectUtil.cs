@@ -5,7 +5,7 @@ using System.Web;
 using OpenConnect.Providers.QQ;
 using OpenConnect.Providers.Weibo;
 
-namespace OpenConnect.MvcExample.Models
+namespace OpenConnect.MvcExample.Utils
 {
     public class OpenConnectUtil
     {
@@ -16,14 +16,19 @@ namespace OpenConnect.MvcExample.Models
             var manager = new OpenConnectClientManager();
 
             manager.Add("QQ", new OpenConnectClient(
-                new AppInfo("100238506", "0379c7b5e5f78aa7909f2238d3186893", null, "http://test.sigcms.com/Account/QQLoginSuccess"),
+                new AppInfo("100238506", "0379c7b5e5f78aa7909f2238d3186893", null, GetRedirectUri("QQ")),
                 new QQOpenConnectProvider()));
 
             manager.Add("Sina Weibo", new OpenConnectClient(
-                new AppInfo("2841977476", "f8abbb8426b825822f81ef80bb648d08", null, "http://test.sigcms.com/Account/WeiboLoginSuccess"),
+                new AppInfo("2841977476", "f8abbb8426b825822f81ef80bb648d08", null, GetRedirectUri("Sina Weibo")),
                 new SinaWeiboOpenConnectProvider()));
 
             ClientManager = manager;
+        }
+
+        static string GetRedirectUri(string clientName)
+        {
+            return "http://test.sigcms.com/LoginCallback/Success?clientName=" + clientName;
         }
     }
 }

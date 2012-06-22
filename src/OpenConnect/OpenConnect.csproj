@@ -46,9 +46,9 @@
     <Compile Include="Providers\Renren\RenrenApiUtil.cs" />
     <Compile Include="Providers\Renren\RenrenOpenConnectProvider.cs" />
     <Compile Include="Providers\Renren\RenrenUserInfoRetriever.cs" />
-    <Compile Include="Providers\StandardAccessTokenRetriever.cs" />
+    <Compile Include="Providers\OAuthAccessTokenRetriever.cs" />
     <Compile Include="AppInfo.cs" />
-    <Compile Include="Providers\StandardAuthorizationUrlBuilder.cs" />
+    <Compile Include="Providers\OAuthAuthorizationUrlBuilder.cs" />
     <Compile Include="Config\ConfigurationException.cs" />
     <Compile Include="Config\OpenConnectConfigurationReader.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
@@ -70,7 +70,7 @@
     <Compile Include="Providers\QQ\QQUserInfoRetriever.cs" />
     <Compile Include="Providers\HttpClient.cs" />
     <Compile Include="ApiException.cs" />
-    <Compile Include="Check.cs" />
+    <Compile Include="Require.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Providers\IHttpClient.cs" />
     <Compile Include="Providers\IOpenConnectProvider.cs" />

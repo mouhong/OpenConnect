@@ -7,8 +7,8 @@ namespace OpenConnect.MvcExample.Models
 {
     public class LoginLink
     {
-        public string Text { get; set; }
+        public string NavigateUrl { get; set; }
 
-        public string Url { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

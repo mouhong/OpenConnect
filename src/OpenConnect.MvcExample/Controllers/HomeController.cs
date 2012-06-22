@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OpenConnect.MvcExample.Models;
+using OpenConnect.MvcExample.Utils;
 
 namespace OpenConnect.MvcExample.Controllers
 {
@@ -11,17 +12,20 @@ namespace OpenConnect.MvcExample.Controllers
     {
         public ActionResult Index()
         {
-            var links = new List<LoginLink>()
+            var links = new List<LoginLink>();
+
+            foreach (var name in OpenConnectUtil.ClientManager.ClientNames)
             {
-                new LoginLink {
-                    Text = "QQ",
-                    Url = OpenConnectUtil.ClientManager.Find("QQ").GetAuthUrl(null, ResponseType.Code)
-                },
-                new LoginLink {
-                    Text = "Sina Weibo",
-                    Url = OpenConnectUtil.ClientManager.Find("Sina Weibo").GetAuthUrl(null, ResponseType.Code)
-                }
-            };
+                var client = OpenConnectUtil.ClientManager.Find(name);
+
+                var link = new LoginLink
+                {
+                    ImageUrl = "/Content/Images/connect-" + name.Replace(' ', '-') + ".png",
+                    NavigateUrl = client.GetAuthUrl(null, ResponseType.Code)
+                };
+
+                links.Add(link);
+            }
 
             return View(links);
         }

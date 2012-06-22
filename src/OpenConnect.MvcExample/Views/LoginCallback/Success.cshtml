@@ -1,0 +1,14 @@
+﻿@model OpenConnect.UserInfo
+
+@{
+    ViewBag.Title = "Welcome!";
+}
+
+<h2>Welcome @Model.NickName!</h2>
+
+<div style="padding:10px 0">
+    <img src="@Model.FigureUrl" />
+</div>
+<div>
+    You're login with @ViewBag.ClientName.
+</div>

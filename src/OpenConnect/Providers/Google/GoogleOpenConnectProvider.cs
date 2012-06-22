@@ -14,7 +14,7 @@ namespace OpenConnect.Providers.Google
 
         public IAccessTokenRetriever GetAccessTokenRetriever()
         {
-            return new StandardAccessTokenRetriever("https://accounts.google.com/o/oauth2/token")
+            return new OAuthAccessTokenRetriever("https://accounts.google.com/o/oauth2/token")
             {
                 Method = HttpMethod.Post
             };

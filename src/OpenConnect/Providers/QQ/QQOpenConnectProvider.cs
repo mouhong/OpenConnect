@@ -9,7 +9,7 @@ namespace OpenConnect.Providers.QQ
     {
         public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
         {
-            return new StandardAuthorizationUrlBuilder("https://graph.qq.com/oauth2.0/authorize");
+            return new OAuthAuthorizationUrlBuilder("https://graph.qq.com/oauth2.0/authorize");
         }
 
         public IAccessTokenRetriever GetAccessTokenRetriever()

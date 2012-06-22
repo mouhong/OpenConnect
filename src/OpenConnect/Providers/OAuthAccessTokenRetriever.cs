@@ -9,7 +9,7 @@ using OpenConnect.Utils;
 
 namespace OpenConnect.Providers
 {
-    public class StandardAccessTokenRetriever : IAccessTokenRetriever
+    public class OAuthAccessTokenRetriever : IAccessTokenRetriever
     {
         public HttpMethod Method { get; set; }
 
@@ -17,12 +17,12 @@ namespace OpenConnect.Providers
 
         public IHttpClient HttpClient { get; private set; }
 
-        public StandardAccessTokenRetriever(string apiPath)
+        public OAuthAccessTokenRetriever(string apiPath)
             : this(apiPath, OpenConnect.Providers.HttpClient.Instance)
         {
         }
 
-        public StandardAccessTokenRetriever(string apiPath, IHttpClient httpClient)
+        public OAuthAccessTokenRetriever(string apiPath, IHttpClient httpClient)
         {
             Require.NotNullOrEmpty(apiPath, "apiPath");
             Require.NotNull(httpClient, "httpClient");

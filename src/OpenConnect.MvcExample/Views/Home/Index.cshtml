@@ -9,8 +9,6 @@
 <div>
 @foreach (var link in Model)
 {
-    <div>
-        <a href="@link.Url">@link.Text</a>
-    </div>
+    <a href="@link.NavigateUrl"><img src="@link.ImageUrl" alt="" /></a>
 }
 </div>

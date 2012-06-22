@@ -5,11 +5,11 @@ using System.Text;
 
 namespace OpenConnect.Providers
 {
-    public class StandardAuthorizationUrlBuilder : IAuthorizationUrlBuilder
+    public class OAuthAuthorizationUrlBuilder : IAuthorizationUrlBuilder
     {
         public string ApiPath { get; private set; }
 
-        public StandardAuthorizationUrlBuilder(string apiPath)
+        public OAuthAuthorizationUrlBuilder(string apiPath)
         {
             Require.NotNullOrEmpty(apiPath, "apiPath");
 
