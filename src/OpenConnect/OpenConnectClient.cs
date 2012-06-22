@@ -15,11 +15,6 @@ namespace OpenConnect
 
         public AppInfo AppInfo { get; private set; }
 
-        public OpenConnectClient(AppInfo appInfo, string openConnectProviderInvariantName)
-            : this(appInfo, OpenConnectProviderFactories.Current.GetProvider(openConnectProviderInvariantName))
-        {
-        }
-
         public OpenConnectClient(AppInfo appInfo, IOpenConnectProvider provider)
         {
             Require.NotNull(appInfo, "appInfo");
@@ -36,7 +31,7 @@ namespace OpenConnect
             return _urlBuilder.Build(AppInfo, display, responseType);
         }
 
-        public AccessToken GetAccessToken(string authCode, string state)
+        public AccessToken GetAccessToken(string authCode, string state = null)
         {
             return _accessTokenRetriever.Retrieve(AppInfo, authCode, state);
         }

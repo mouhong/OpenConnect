@@ -15,7 +15,8 @@ namespace OpenConnect.Providers.Google
                                     .WithParam("response_type", responseType == ResponseType.Code ? "code" : "token")
                                     .WithParam("client_id", appInfo.AppId)
                                     .WithParam("redirect_uri", appInfo.RedirectUri)
-                                    .WithParam("approval_prompt", display);
+                                    .WithParam("approval_prompt", display)
+                                    .WithParam("scope", appInfo.Scope);
 
             return builder.Build();
         }

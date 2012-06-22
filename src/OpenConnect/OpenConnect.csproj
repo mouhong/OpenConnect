@@ -40,9 +40,7 @@
   <ItemGroup>
     <Compile Include="OpenConnectClientManager.cs" />
     <Compile Include="Providers\AccessToken.cs" />
-    <Compile Include="Providers\IOpenConnectProviderFactory.cs" />
-    <Compile Include="OpenConnectProviderFactories.cs" />
-    <Compile Include="Providers\OpenConnectProviderFactory.cs" />
+    <Compile Include="Providers\Google\GoogleAccessTokenRetriver.cs" />
     <Compile Include="Providers\Renren\RenrenApiUtil.cs" />
     <Compile Include="Providers\Renren\RenrenOpenConnectProvider.cs" />
     <Compile Include="Providers\Renren\RenrenUserInfoRetriever.cs" />

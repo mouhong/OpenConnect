@@ -33,7 +33,7 @@ namespace OpenConnect.Providers
         {
             Require.NotNullOrEmpty(name, "name");
 
-            Parameters[name] = value;
+            Parameters[name] = value ?? String.Empty;
 
             return this;
         }

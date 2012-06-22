@@ -69,7 +69,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\connect-google.png" />
+    <Content Include="Content\images\connect-live.png" />
     <Content Include="Content\images\connect-qq.png" />
+    <Content Include="Content\images\connect-renren.png" />
     <Content Include="Content\images\connect-sina-weibo.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />

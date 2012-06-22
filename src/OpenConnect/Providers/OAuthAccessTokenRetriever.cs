@@ -41,7 +41,7 @@ namespace OpenConnect.Providers
             return ParseResponse(response, now);
         }
 
-        protected virtual string GetResponse(AppInfo appInfo, string authCode, string state)
+        protected virtual NameValueCollection BuildRequestParameters(AppInfo appInfo, string authCode, string state)
         {
             var data = new NameValueCollection().FluentAdd("client_id", appInfo.AppId)
                                                 .FluentAdd("client_secret", appInfo.AppSecret)
@@ -49,6 +49,13 @@ namespace OpenConnect.Providers
                                                 .FluentAdd("code", authCode)
                                                 .FluentAdd("grant_type", "authorization_code")
                                                 .AddIfValueIsNotNullOrEmpty("state", state);
+
+            return data;
+        }
+
+        protected virtual string GetResponse(AppInfo appInfo, string authCode, string state)
+        {
+            var data = BuildRequestParameters(appInfo, authCode, state);
 
             if (Method == HttpMethod.Get)
             {
