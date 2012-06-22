@@ -6,19 +6,19 @@ using System.Text.RegularExpressions;
 
 namespace OpenConnect.Providers.Tencent
 {
-    public class TencentAccessTokenRetriever : OAuthAccessTokenRetriever
+    public class TencentGetAccessTokenRequest : OAuthGetAccessTokenRequest
     {
-        public TencentAccessTokenRetriever(string apiPath)
+        public TencentGetAccessTokenRequest(string apiPath)
             : base(apiPath)
         {
         }
 
-        public TencentAccessTokenRetriever(string apiPath, IHttpClient httpClient)
+        public TencentGetAccessTokenRequest(string apiPath, IHttpClient httpClient)
             : base(apiPath, httpClient)
         {
         }
 
-        protected override AccessToken ParseResponse(string response, DateTime startRequestTime)
+        protected override AccessToken ParseRawResponse(string response, DateTime startRequestTime)
         {
             var result = AccessTokenRequestResult.Parse(response);
 

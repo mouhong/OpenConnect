@@ -12,14 +12,14 @@ namespace OpenConnect.Providers.Renren
             return new OAuthAuthorizationUrlBuilder("https://graph.renren.com/oauth/authorize");
         }
 
-        public IAccessTokenRetriever GetAccessTokenRetriever()
+        public IGetAccessTokenRequest GetAccessTokenRetriever()
         {
-            return new OAuthAccessTokenRetriever("https://graph.renren.com/oauth/token");
+            return new OAuthGetAccessTokenRequest("https://graph.renren.com/oauth/token");
         }
 
-        public IUserInfoRetriever GetUserInfoRetriever()
+        public IGetUserInfoRequest GetUserInfoRetriever()
         {
-            return new RenrenUserInfoRetriever();
+            return new RenrenGetUserInfoRequest();
         }
     }
 }

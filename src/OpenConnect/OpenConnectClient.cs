@@ -10,8 +10,8 @@ namespace OpenConnect
     public class OpenConnectClient
     {
         private IAuthorizationUrlBuilder _urlBuilder;
-        private IAccessTokenRetriever _accessTokenRetriever;
-        private IUserInfoRetriever _userInfoRetriever;
+        private IGetAccessTokenRequest _accessTokenRetriever;
+        private IGetUserInfoRequest _userInfoRetriever;
 
         public AppInfo AppInfo { get; private set; }
 
@@ -33,17 +33,12 @@ namespace OpenConnect
 
         public AccessToken GetAccessToken(string authCode, string state = null)
         {
-            return _accessTokenRetriever.Retrieve(AppInfo, authCode, state);
-        }
-
-        public AccessToken RefreshAccessToken(string refreshToken)
-        {
-            return _accessTokenRetriever.Refresh(AppInfo, refreshToken);
+            return _accessTokenRetriever.GetResponse(AppInfo, authCode, state);
         }
 
         public UserInfo GetUserInfo(string accessToken, string userOpenId = null)
         {
-            return _userInfoRetriever.Retrieve(AppInfo, accessToken, userOpenId);
+            return _userInfoRetriever.GetResponse(AppInfo, accessToken, userOpenId);
         }
     }
 }

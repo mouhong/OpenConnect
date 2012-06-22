@@ -7,23 +7,23 @@ using OpenConnect.Utils;
 
 namespace OpenConnect.Providers.Tencent.QQ
 {
-    public class QQUserInfoRetriever : IUserInfoRetriever
+    public class QQGetUserInfoRequest : IGetUserInfoRequest
     {
         public IHttpClient HttpClient { get; private set; }
 
-        public QQUserInfoRetriever()
+        public QQGetUserInfoRequest()
             : this(OpenConnect.Providers.HttpClient.Instance)
         {
         }
 
-        public QQUserInfoRetriever(IHttpClient httpClient)
+        public QQGetUserInfoRequest(IHttpClient httpClient)
         {
             Require.NotNull(httpClient, "httpClient");
 
             HttpClient = httpClient;
         }
 
-        public UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId)
+        public UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId)
         {
             Require.NotNull(appInfo, "appInfo");
             Require.NotNullOrEmpty(accessToken, "accessToken");

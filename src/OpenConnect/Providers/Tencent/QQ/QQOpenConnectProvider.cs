@@ -12,14 +12,14 @@ namespace OpenConnect.Providers.Tencent.QQ
             return new OAuthAuthorizationUrlBuilder("https://graph.qq.com/oauth2.0/authorize");
         }
 
-        public IAccessTokenRetriever GetAccessTokenRetriever()
+        public IGetAccessTokenRequest GetAccessTokenRetriever()
         {
-            return new TencentAccessTokenRetriever("https://graph.qq.com/oauth2.0/token");
+            return new TencentGetAccessTokenRequest("https://graph.qq.com/oauth2.0/token");
         }
 
-        public IUserInfoRetriever GetUserInfoRetriever()
+        public IGetUserInfoRequest GetUserInfoRetriever()
         {
-            return new QQUserInfoRetriever();
+            return new QQGetUserInfoRequest();
         }
     }
 }

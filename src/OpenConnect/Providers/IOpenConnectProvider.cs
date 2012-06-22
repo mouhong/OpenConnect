@@ -9,8 +9,8 @@ namespace OpenConnect.Providers
     {
         IAuthorizationUrlBuilder GetAuthorizationUrlBuilder();
 
-        IAccessTokenRetriever GetAccessTokenRetriever();
+        IGetAccessTokenRequest GetAccessTokenRetriever();
 
-        IUserInfoRetriever GetUserInfoRetriever();
+        IGetUserInfoRequest GetUserInfoRetriever();
     }
 }

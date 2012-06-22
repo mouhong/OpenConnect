@@ -5,8 +5,8 @@ using System.Text;
 
 namespace OpenConnect.Providers
 {
-    public interface IUserInfoRetriever
+    public interface IGetUserInfoRequest
     {
-        UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId);
+        UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId);
     }
 }

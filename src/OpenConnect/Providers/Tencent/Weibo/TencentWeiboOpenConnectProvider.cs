@@ -12,14 +12,14 @@ namespace OpenConnect.Providers.Tencent.Weibo
             return new OAuthAuthorizationUrlBuilder("https://open.t.qq.com/cgi-bin/oauth2/authorize");
         }
 
-        public IAccessTokenRetriever GetAccessTokenRetriever()
+        public IGetAccessTokenRequest GetAccessTokenRetriever()
         {
-            return new TencentAccessTokenRetriever("https://open.t.qq.com/cgi-bin/oauth2/access_token");
+            return new TencentGetAccessTokenRequest("https://open.t.qq.com/cgi-bin/oauth2/access_token");
         }
 
-        public IUserInfoRetriever GetUserInfoRetriever()
+        public IGetUserInfoRequest GetUserInfoRetriever()
         {
-            return new TencentWeiboUserInfoRetriever();
+            return new TencentWeiboGetUserInfoRequest();
         }
     }
 }

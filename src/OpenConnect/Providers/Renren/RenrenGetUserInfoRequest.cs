@@ -8,23 +8,23 @@ using OpenConnect.Utils;
 
 namespace OpenConnect.Providers.Renren
 {
-    public class RenrenUserInfoRetriever : IUserInfoRetriever
+    public class RenrenGetUserInfoRequest : IGetUserInfoRequest
     {
         public IHttpClient HttpClient { get; private set; }
 
-        public RenrenUserInfoRetriever()
+        public RenrenGetUserInfoRequest()
             : this(OpenConnect.Providers.HttpClient.Instance)
         {
         }
 
-        public RenrenUserInfoRetriever(IHttpClient httpClient)
+        public RenrenGetUserInfoRequest(IHttpClient httpClient)
         {
             Require.NotNull(httpClient, "httpClient");
 
             HttpClient = httpClient;
         }
 
-        public UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId)
+        public UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId)
         {
             var apiPath = "http://api.renren.com/restserver.do";
 

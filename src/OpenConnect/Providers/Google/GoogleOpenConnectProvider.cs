@@ -12,17 +12,17 @@ namespace OpenConnect.Providers.Google
             return new GoogleAuthorizationUrlBuilder();
         }
 
-        public IAccessTokenRetriever GetAccessTokenRetriever()
+        public IGetAccessTokenRequest GetAccessTokenRetriever()
         {
-            return new GoogleAccessTokenRetriver
+            return new GoogleGetAccessTokenRequest
             {
                 Method = HttpMethod.Post
             };
         }
 
-        public IUserInfoRetriever GetUserInfoRetriever()
+        public IGetUserInfoRequest GetUserInfoRetriever()
         {
-            return new GoogleUserInfoRetriever();
+            return new GoogleGetUserInfoRequest();
         }
     }
 }

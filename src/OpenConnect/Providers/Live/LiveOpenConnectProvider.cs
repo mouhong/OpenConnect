@@ -12,17 +12,17 @@ namespace OpenConnect.Providers.Live
             return new OAuthAuthorizationUrlBuilder("https://oauth.live.com/authorize");
         }
 
-        public IAccessTokenRetriever GetAccessTokenRetriever()
+        public IGetAccessTokenRequest GetAccessTokenRetriever()
         {
-            return new OAuthAccessTokenRetriever("https://oauth.live.com/token")
+            return new OAuthGetAccessTokenRequest("https://oauth.live.com/token")
             {
                 Method = HttpMethod.Get
             };
         }
 
-        public IUserInfoRetriever GetUserInfoRetriever()
+        public IGetUserInfoRequest GetUserInfoRetriever()
         {
-            return new LiveUserInfoRetriever();
+            return new LiveGetUserInfoRequest();
         }
     }
 }

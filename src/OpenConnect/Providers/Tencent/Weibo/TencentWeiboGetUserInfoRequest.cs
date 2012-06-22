@@ -6,23 +6,23 @@ using OpenConnect.Utils;
 
 namespace OpenConnect.Providers.Tencent.Weibo
 {
-    public class TencentWeiboUserInfoRetriever : IUserInfoRetriever
+    public class TencentWeiboGetUserInfoRequest : IGetUserInfoRequest
     {
         public IHttpClient HttpClient { get; private set; }
 
-        public TencentWeiboUserInfoRetriever()
+        public TencentWeiboGetUserInfoRequest()
             : this(OpenConnect.Providers.HttpClient.Instance)
         {
         }
 
-        public TencentWeiboUserInfoRetriever(IHttpClient httpClient)
+        public TencentWeiboGetUserInfoRequest(IHttpClient httpClient)
         {
             Require.NotNull(httpClient, "httpClient");
 
             HttpClient = httpClient;
         }
 
-        public UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId)
+        public UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId)
         {
             Require.NotNull(appInfo, "appInfo");
             Require.NotNullOrEmpty(accessToken, "accessToken");

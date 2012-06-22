@@ -5,27 +5,28 @@ using System.Text;
 
 using OpenConnect.Utils;
 
-namespace OpenConnect.Providers.Live
+namespace OpenConnect.Providers.Google
 {
-    public class LiveUserInfoRetriever : IUserInfoRetriever
+    public class GoogleGetUserInfoRequest : IGetUserInfoRequest
     {
         public IHttpClient HttpClient { get; private set; }
 
-        public LiveUserInfoRetriever()
+        public GoogleGetUserInfoRequest()
             : this(OpenConnect.Providers.HttpClient.Instance)
         {
         }
 
-        public LiveUserInfoRetriever(IHttpClient httpClient)
+        public GoogleGetUserInfoRequest(IHttpClient httpClient)
         {
             Require.NotNull(httpClient, "httpClient");
 
             HttpClient = httpClient;
         }
 
-        public UserInfo Retrieve(AppInfo appInfo, string accessToken, string userOpenId)
+        public UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId)
         {
-            var url = UrlBuilder.Create("https://apis.live.net/v5.0/me")
+            var url = UrlBuilder.Create("https://www.googleapis.com/oauth2/v1/userinfo")
+                                .WithParam("alt", "json")
                                 .WithParam("access_token", accessToken)
                                 .Build();
 
@@ -35,9 +36,9 @@ namespace OpenConnect.Providers.Live
             return new UserInfo
             {
                 Id = result.id,
-                Gender = result.gender == null ? Gender.Unknown : (result.gender == "male" ? Gender.Male : Gender.Female),
                 NickName = result.name,
-                Email = result.account
+                HeadImageUrl = result.picture,
+                Gender = result.gender == "male" ? Gender.Male : Gender.Female
             };
         }
     }

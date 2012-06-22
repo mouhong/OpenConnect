@@ -9,7 +9,7 @@ using OpenConnect.Utils;
 
 namespace OpenConnect.Providers
 {
-    public class OAuthAccessTokenRetriever : IAccessTokenRetriever
+    public class OAuthGetAccessTokenRequest : IGetAccessTokenRequest
     {
         public HttpMethod Method { get; set; }
 
@@ -17,12 +17,12 @@ namespace OpenConnect.Providers
 
         public IHttpClient HttpClient { get; private set; }
 
-        public OAuthAccessTokenRetriever(string apiPath)
+        public OAuthGetAccessTokenRequest(string apiPath)
             : this(apiPath, OpenConnect.Providers.HttpClient.Instance)
         {
         }
 
-        public OAuthAccessTokenRetriever(string apiPath, IHttpClient httpClient)
+        public OAuthGetAccessTokenRequest(string apiPath, IHttpClient httpClient)
         {
             Require.NotNullOrEmpty(apiPath, "apiPath");
             Require.NotNull(httpClient, "httpClient");
@@ -31,14 +31,14 @@ namespace OpenConnect.Providers
             HttpClient = httpClient;
         }
 
-        public AccessToken Retrieve(AppInfo appInfo, string authCode, string state)
+        public AccessToken GetResponse(AppInfo appInfo, string authCode, string state)
         {
             Require.NotNull(appInfo, "appInfo");
             Require.NotNullOrEmpty(authCode, "authCode");
 
             var now = DateTime.Now;
-            var response = GetResponse(appInfo, authCode, state);
-            return ParseResponse(response, now);
+            var response = GetRawResponse(appInfo, authCode, state);
+            return ParseRawResponse(response, now);
         }
 
         protected virtual NameValueCollection BuildRequestParameters(AppInfo appInfo, string authCode, string state)
@@ -53,7 +53,7 @@ namespace OpenConnect.Providers
             return data;
         }
 
-        protected virtual string GetResponse(AppInfo appInfo, string authCode, string state)
+        protected virtual string GetRawResponse(AppInfo appInfo, string authCode, string state)
         {
             var data = BuildRequestParameters(appInfo, authCode, state);
 
@@ -65,16 +65,11 @@ namespace OpenConnect.Providers
             return HttpClient.Post(ApiPath, data, Encoding.UTF8);
         }
 
-        protected virtual AccessToken ParseResponse(string response, DateTime startRequestTime)
+        protected virtual AccessToken ParseRawResponse(string response, DateTime startRequestTime)
         {
             var result = (GetAccessTokenResult)JsonSerializer.Deserialize(response, typeof(GetAccessTokenResult));
 
             return new AccessToken(result.access_token, startRequestTime.AddSeconds( result.expires_in), result.refresh_token);
-        }
-
-        public virtual AccessToken Refresh(AppInfo appInfo, string refreshToken)
-        {
-            throw new NotSupportedException();
         }
 
         [DataContract]

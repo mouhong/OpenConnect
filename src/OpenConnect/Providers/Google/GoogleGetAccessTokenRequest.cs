@@ -5,14 +5,14 @@ using System.Text;
 
 namespace OpenConnect.Providers.Google
 {
-    public class GoogleAccessTokenRetriver : OAuthAccessTokenRetriever
+    public class GoogleGetAccessTokenRequest : OAuthGetAccessTokenRequest
     {
-        public GoogleAccessTokenRetriver()
+        public GoogleGetAccessTokenRequest()
             : this(OpenConnect.Providers.HttpClient.Instance)
         {
         }
 
-        public GoogleAccessTokenRetriver(IHttpClient httpClient)
+        public GoogleGetAccessTokenRequest(IHttpClient httpClient)
             : base("https://accounts.google.com/o/oauth2/token", httpClient)
         {
         }

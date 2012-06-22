@@ -12,17 +12,17 @@ namespace OpenConnect.Providers.Weibo
             return new OAuthAuthorizationUrlBuilder("https://api.weibo.com/oauth2/authorize");
         }
 
-        public IAccessTokenRetriever GetAccessTokenRetriever()
+        public IGetAccessTokenRequest GetAccessTokenRetriever()
         {
-            return new OAuthAccessTokenRetriever("https://api.weibo.com/oauth2/access_token")
+            return new OAuthGetAccessTokenRequest("https://api.weibo.com/oauth2/access_token")
             {
                 Method = HttpMethod.Post
             };
         }
 
-        public IUserInfoRetriever GetUserInfoRetriever()
+        public IGetUserInfoRequest GetUserInfoRetriever()
         {
-            return new SinaWeiboUserInfoRetriever();
+            return new SinaWeiboGetUserInfoRequest();
         }
     }
 }
