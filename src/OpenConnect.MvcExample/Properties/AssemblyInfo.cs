@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("OpenConnect.MvcExample")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("OpenConnect.MvcExample")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCompany("Mouhong")]
+[assembly: AssemblyProduct("OpenConnect")]
+[assembly: AssemblyCopyright("Copyright © Mouhong")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
