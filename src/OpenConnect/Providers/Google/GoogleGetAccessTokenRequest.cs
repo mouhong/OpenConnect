@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OpenConnect.Providers.Google
 {
-    public class GoogleGetAccessTokenRequest : OAuthGetAccessTokenRequest
+    public class GoogleGetAccessTokenRequest : StandardGetAccessTokenRequest
     {
         public GoogleGetAccessTokenRequest()
             : this(OpenConnect.Providers.HttpClient.Instance)

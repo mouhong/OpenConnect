@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace OpenConnect.Providers.Tencent
 {
-    public class TencentGetAccessTokenRequest : OAuthGetAccessTokenRequest
+    public class TencentGetAccessTokenRequest : StandardGetAccessTokenRequest
     {
         public TencentGetAccessTokenRequest(string apiPath)
             : base(apiPath)

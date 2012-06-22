@@ -24,7 +24,7 @@ namespace OpenConnect.Providers.Renren
             HttpClient = httpClient;
         }
 
-        public UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId)
+        public IUserInfo GetResponse(AppInfo appInfo, string accessToken, string userId)
         {
             var apiPath = "http://api.renren.com/restserver.do";
 
@@ -39,38 +39,14 @@ namespace OpenConnect.Providers.Renren
             data.Add("sig", sig);
 
             var json = HttpClient.Post(apiPath, data, Encoding.UTF8);
-            var result = (List<GetUserInfoResult>)JsonSerializer.Deserialize(json, typeof(List<GetUserInfoResult>));
 
-            if (result.Count > 0)
-            {
-                var user = result[0];
-
-                return new UserInfo
-                {
-                    Id = user.uid,
-                    NickName = user.name,
-                    HeadImageUrl = user.headurl,
-                    Gender = user.sex == "1" ? Gender.Male : Gender.Female
-                };
-            }
-
-            return null;
+            return ParseRawResponse(json);
         }
 
-        [DataContract]
-        class GetUserInfoResult
+        protected virtual IUserInfo ParseRawResponse(string jsonResponse)
         {
-            [DataMember]
-            public string uid;
-
-            [DataMember]
-            public string name;
-
-            [DataMember]
-            public string sex;
-
-            [DataMember]
-            public string headurl;
+            var result = (List<RenrenUserInfo>)JsonSerializer.Deserialize(jsonResponse, typeof(List<RenrenUserInfo>));
+            return result.FirstOrDefault();
         }
     }
 }

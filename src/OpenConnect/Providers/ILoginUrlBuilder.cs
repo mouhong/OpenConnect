@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OpenConnect.Providers
 {
-    public interface IAuthorizationUrlBuilder
+    public interface ILoginUrlBuilder
     {
         string Build(AppInfo appInfo, string display, ResponseType responseType);
     }

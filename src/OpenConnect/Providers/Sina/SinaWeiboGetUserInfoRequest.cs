@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Runtime.Serialization;
 
 using OpenConnect.Utils;
 
@@ -24,22 +25,22 @@ namespace OpenConnect.Providers.Weibo
             HttpClient = httpClient;
         }
 
-        public UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId)
+        public IUserInfo GetResponse(AppInfo appInfo, string accessToken, string userId)
         {
             Require.NotNull(appInfo, "appInfo");
             Require.NotNullOrEmpty(accessToken, "accessToken");
 
-            if (String.IsNullOrEmpty(userOpenId))
+            if (String.IsNullOrEmpty(userId))
             {
-                userOpenId = GetUserIdentity(accessToken);
+                userId = GetUID(accessToken);
             }
 
-            var userInfo = GetUserInfoByUserIdentity(accessToken, userOpenId);
+            var userInfo = GetUserInfoByUserIdentity(accessToken, userId);
 
             return userInfo;
         }
 
-        private string GetUserIdentity(string accessToken)
+        private string GetUID(string accessToken)
         {
             var data = new NameValueCollection().FluentAdd("access_token", accessToken);
 
@@ -49,15 +50,21 @@ namespace OpenConnect.Providers.Weibo
             return result.uid;
         }
 
-        private UserInfo GetUserInfoByUserIdentity(string accessToken, string uid)
+        private IUserInfo GetUserInfoByUserIdentity(string accessToken, string uid)
         {
             var data = new NameValueCollection().FluentAdd("access_token", accessToken)
                                                 .FluentAdd("uid", uid);
 
             var json = HttpClient.Get("https://api.weibo.com/2/users/show.json", data, Encoding.UTF8);
-            var result = (GetUserInfoResult)JsonSerializer.Deserialize(json, typeof(GetUserInfoResult));
+            
+            return (SinaWeiboUserInfo)JsonSerializer.Deserialize(json, typeof(SinaWeiboUserInfo));
+        }
 
-            return result.ToUserInfo();
+        [DataContract]
+        class GetUIDResult
+        {
+            [DataMember]
+            public string uid = null;
         }
     }
 }

@@ -7,17 +7,21 @@ namespace OpenConnect.Providers.Renren
 {
     public class RenrenOpenConnectProvider : IOpenConnectProvider
     {
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        public RenrenOpenConnectProvider()
         {
-            return new OAuthAuthorizationUrlBuilder("https://graph.renren.com/oauth/authorize");
         }
 
-        public IGetAccessTokenRequest GetAccessTokenRetriever()
+        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
         {
-            return new OAuthGetAccessTokenRequest("https://graph.renren.com/oauth/token");
+            return new StandardLoginUrlBuilder("https://graph.renren.com/oauth/authorize");
         }
 
-        public IGetUserInfoRequest GetUserInfoRetriever()
+        public virtual IGetAccessTokenRequest CreateGetAccessTokenRequest()
+        {
+            return new StandardGetAccessTokenRequest("https://graph.renren.com/oauth/token");
+        }
+
+        public virtual IGetUserInfoRequest CreateGetUserInfoRequest()
         {
             return new RenrenGetUserInfoRequest();
         }

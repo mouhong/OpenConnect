@@ -7,12 +7,16 @@ namespace OpenConnect.Providers.Google
 {
     public class GoogleOpenConnectProvider : IOpenConnectProvider
     {
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        public GoogleOpenConnectProvider()
+        {
+        }
+
+        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
         {
             return new GoogleAuthorizationUrlBuilder();
         }
 
-        public IGetAccessTokenRequest GetAccessTokenRetriever()
+        public virtual IGetAccessTokenRequest CreateGetAccessTokenRequest()
         {
             return new GoogleGetAccessTokenRequest
             {
@@ -20,7 +24,7 @@ namespace OpenConnect.Providers.Google
             };
         }
 
-        public IGetUserInfoRequest GetUserInfoRetriever()
+        public virtual IGetUserInfoRequest CreateGetUserInfoRequest()
         {
             return new GoogleGetUserInfoRequest();
         }

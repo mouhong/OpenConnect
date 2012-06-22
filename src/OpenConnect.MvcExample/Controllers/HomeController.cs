@@ -21,7 +21,7 @@ namespace OpenConnect.MvcExample.Controllers
                 var link = new LoginLink
                 {
                     ImageUrl = "/Content/Images/connect-" + name.Replace(' ', '-') + ".png",
-                    NavigateUrl = client.GetAuthUrl(null, ResponseType.Code)
+                    NavigateUrl = client.GetLoginUrl(null, ResponseType.Code)
                 };
 
                 links.Add(link);

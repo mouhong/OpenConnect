@@ -7,17 +7,21 @@ namespace OpenConnect.Providers.Tencent.QQ
 {
     public class QQOpenConnectProvider : IOpenConnectProvider
     {
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        public QQOpenConnectProvider()
         {
-            return new OAuthAuthorizationUrlBuilder("https://graph.qq.com/oauth2.0/authorize");
         }
 
-        public IGetAccessTokenRequest GetAccessTokenRetriever()
+        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
+        {
+            return new StandardLoginUrlBuilder("https://graph.qq.com/oauth2.0/authorize");
+        }
+
+        public virtual IGetAccessTokenRequest CreateGetAccessTokenRequest()
         {
             return new TencentGetAccessTokenRequest("https://graph.qq.com/oauth2.0/token");
         }
 
-        public IGetUserInfoRequest GetUserInfoRetriever()
+        public virtual IGetUserInfoRequest CreateGetUserInfoRequest()
         {
             return new QQGetUserInfoRequest();
         }

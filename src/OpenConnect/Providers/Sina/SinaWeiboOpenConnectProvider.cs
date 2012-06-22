@@ -7,20 +7,24 @@ namespace OpenConnect.Providers.Weibo
 {
     public class SinaWeiboOpenConnectProvider : IOpenConnectProvider
     {
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        public SinaWeiboOpenConnectProvider()
         {
-            return new OAuthAuthorizationUrlBuilder("https://api.weibo.com/oauth2/authorize");
         }
 
-        public IGetAccessTokenRequest GetAccessTokenRetriever()
+        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
         {
-            return new OAuthGetAccessTokenRequest("https://api.weibo.com/oauth2/access_token")
+            return new StandardLoginUrlBuilder("https://api.weibo.com/oauth2/authorize");
+        }
+
+        public virtual IGetAccessTokenRequest CreateGetAccessTokenRequest()
+        {
+            return new StandardGetAccessTokenRequest("https://api.weibo.com/oauth2/access_token")
             {
                 Method = HttpMethod.Post
             };
         }
 
-        public IGetUserInfoRequest GetUserInfoRetriever()
+        public virtual IGetUserInfoRequest CreateGetUserInfoRequest()
         {
             return new SinaWeiboGetUserInfoRequest();
         }

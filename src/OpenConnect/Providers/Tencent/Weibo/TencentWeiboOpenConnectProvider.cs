@@ -7,17 +7,21 @@ namespace OpenConnect.Providers.Tencent.Weibo
 {
     public class TencentWeiboOpenConnectProvider : IOpenConnectProvider
     {
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        public TencentWeiboOpenConnectProvider()
         {
-            return new OAuthAuthorizationUrlBuilder("https://open.t.qq.com/cgi-bin/oauth2/authorize");
         }
 
-        public IGetAccessTokenRequest GetAccessTokenRetriever()
+        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
+        {
+            return new StandardLoginUrlBuilder("https://open.t.qq.com/cgi-bin/oauth2/authorize");
+        }
+
+        public virtual IGetAccessTokenRequest CreateGetAccessTokenRequest()
         {
             return new TencentGetAccessTokenRequest("https://open.t.qq.com/cgi-bin/oauth2/access_token");
         }
 
-        public IGetUserInfoRequest GetUserInfoRetriever()
+        public virtual IGetUserInfoRequest CreateGetUserInfoRequest()
         {
             return new TencentWeiboGetUserInfoRequest();
         }

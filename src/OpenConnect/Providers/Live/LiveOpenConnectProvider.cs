@@ -7,20 +7,24 @@ namespace OpenConnect.Providers.Live
 {
     public class LiveOpenConnectProvider : IOpenConnectProvider
     {
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        public LiveOpenConnectProvider()
         {
-            return new OAuthAuthorizationUrlBuilder("https://oauth.live.com/authorize");
         }
 
-        public IGetAccessTokenRequest GetAccessTokenRetriever()
+        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
         {
-            return new OAuthGetAccessTokenRequest("https://oauth.live.com/token")
+            return new StandardLoginUrlBuilder("https://oauth.live.com/authorize");
+        }
+
+        public virtual IGetAccessTokenRequest CreateGetAccessTokenRequest()
+        {
+            return new StandardGetAccessTokenRequest("https://oauth.live.com/token")
             {
                 Method = HttpMethod.Get
             };
         }
 
-        public IGetUserInfoRequest GetUserInfoRetriever()
+        public virtual IGetUserInfoRequest CreateGetUserInfoRequest()
         {
             return new LiveGetUserInfoRequest();
         }

@@ -23,7 +23,7 @@ namespace OpenConnect.Providers.Google
             HttpClient = httpClient;
         }
 
-        public UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId)
+        public IUserInfo GetResponse(AppInfo appInfo, string accessToken, string userId)
         {
             var url = UrlBuilder.Create("https://www.googleapis.com/oauth2/v1/userinfo")
                                 .WithParam("alt", "json")
@@ -31,15 +31,13 @@ namespace OpenConnect.Providers.Google
                                 .Build();
 
             var json = HttpClient.Get(url, null, Encoding.UTF8);
-            var result = (GetUserInfoResult)JsonSerializer.Deserialize(json, typeof(GetUserInfoResult));
 
-            return new UserInfo
-            {
-                Id = result.id,
-                NickName = result.name,
-                HeadImageUrl = result.picture,
-                Gender = result.gender == "male" ? Gender.Male : Gender.Female
-            };
+            return ParseRawResponse(json);
+        }
+
+        protected virtual IUserInfo ParseRawResponse(string jsonResponse)
+        {
+            return (GoogleUserInfo)JsonSerializer.Deserialize(jsonResponse, typeof(GoogleUserInfo));
         }
     }
 }

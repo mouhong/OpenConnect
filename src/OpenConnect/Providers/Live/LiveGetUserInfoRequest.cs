@@ -23,22 +23,20 @@ namespace OpenConnect.Providers.Live
             HttpClient = httpClient;
         }
 
-        public UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId)
+        public IUserInfo GetResponse(AppInfo appInfo, string accessToken, string userId)
         {
             var url = UrlBuilder.Create("https://apis.live.net/v5.0/me")
                                 .WithParam("access_token", accessToken)
                                 .Build();
 
             var json = HttpClient.Get(url, null, Encoding.UTF8);
-            var result = (GetUserInfoResult)JsonSerializer.Deserialize(json, typeof(GetUserInfoResult));
 
-            return new UserInfo
-            {
-                Id = result.id,
-                Gender = result.gender == null ? Gender.Unknown : (result.gender == "male" ? Gender.Male : Gender.Female),
-                NickName = result.name,
-                Email = result.account
-            };
+            return ParseRawResponse(json);
+        }
+
+        protected virtual IUserInfo ParseRawResponse(string jsonResponse)
+        {
+            return (LiveUserInfo)JsonSerializer.Deserialize(jsonResponse, typeof(LiveUserInfo));
         }
     }
 }

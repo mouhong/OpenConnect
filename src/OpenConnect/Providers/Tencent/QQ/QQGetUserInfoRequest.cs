@@ -23,17 +23,17 @@ namespace OpenConnect.Providers.Tencent.QQ
             HttpClient = httpClient;
         }
 
-        public UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId)
+        public IUserInfo GetResponse(AppInfo appInfo, string accessToken, string userId)
         {
             Require.NotNull(appInfo, "appInfo");
             Require.NotNullOrEmpty(accessToken, "accessToken");
 
-            if (String.IsNullOrEmpty(userOpenId))
+            if (String.IsNullOrEmpty(userId))
             {
-                userOpenId = GetUserIdentity(accessToken);
+                userId = GetUserIdentity(accessToken);
             }
 
-            var userInfo = GetUserInfoByUserIdentity(appInfo, accessToken, userOpenId);
+            var userInfo = GetUserInfoByUserIdentity(appInfo, accessToken, userId);
 
             return userInfo;
         }
@@ -60,7 +60,7 @@ namespace OpenConnect.Providers.Tencent.QQ
             throw new ApiException("Unrecognized response: " + result + ".");
         }
 
-        private UserInfo GetUserInfoByUserIdentity(AppInfo appInfo, string accessToken, string userIdentity)
+        private IUserInfo GetUserInfoByUserIdentity(AppInfo appInfo, string accessToken, string userIdentity)
         {
             var url = UrlBuilder.Create("https://graph.qq.com/user/get_user_info")
                                 .WithParam("access_token", accessToken)
@@ -74,10 +74,9 @@ namespace OpenConnect.Providers.Tencent.QQ
             if (result.ret < 0)
                 throw new ApiException(result.msg, result.ret.ToString());
 
-            var user = result.ToUserInfo();
-            user.Id = userIdentity;
+            result.Id = userIdentity;
 
-            return user;
+            return result;
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OpenConnect.Providers.Google
 {
-    public class GoogleAuthorizationUrlBuilder : IAuthorizationUrlBuilder
+    public class GoogleAuthorizationUrlBuilder : ILoginUrlBuilder
     {
         public string Build(AppInfo appInfo, string display, ResponseType responseType)
         {

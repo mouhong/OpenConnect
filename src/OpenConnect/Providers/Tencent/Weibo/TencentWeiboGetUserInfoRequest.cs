@@ -22,7 +22,7 @@ namespace OpenConnect.Providers.Tencent.Weibo
             HttpClient = httpClient;
         }
 
-        public UserInfo GetResponse(AppInfo appInfo, string accessToken, string userOpenId)
+        public IUserInfo GetResponse(AppInfo appInfo, string accessToken, string userId)
         {
             Require.NotNull(appInfo, "appInfo");
             Require.NotNullOrEmpty(accessToken, "accessToken");
@@ -32,7 +32,7 @@ namespace OpenConnect.Providers.Tencent.Weibo
                                 .WithParam("access_token", accessToken)
                                 .WithParam("scope", appInfo.Scope)
                                 .WithParam("oauth_version", "2.a")
-                                .WithParam("openid", userOpenId)
+                                .WithParam("openid", userId)
                                 .Build();
 
             var json = HttpClient.Get(url, null, Encoding.UTF8);
@@ -40,21 +40,9 @@ namespace OpenConnect.Providers.Tencent.Weibo
             var result = (GetUserInfoResult)JsonSerializer.Deserialize(json, typeof(GetUserInfoResult));
 
             if (result.ret != 0)
-                throw new ApiException(result.msg);
+                throw new ApiException(result.msg + " Error code:  " + result.errcode);
 
-            if (result.data == null)
-            {
-                return null;
-            }
-
-            return new UserInfo
-            {
-                Id = result.data.openid,
-                Email = result.data.email,
-                Gender = result.data.sex == 1 ? Gender.Male : (result.data.sex == 2 ? Gender.Female : Gender.Unknown),
-                NickName = result.data.nick,
-                HeadImageUrl = String.IsNullOrEmpty(result.data.head) ? null : result.data.head + "/100"
-            };
+            return result.data;
         }
     }
 }
