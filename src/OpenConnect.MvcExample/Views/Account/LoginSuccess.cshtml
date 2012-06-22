@@ -1,0 +1,12 @@
+﻿@model OpenConnect.UserInfo
+@{
+    ViewBag.Title = "Welcome, " + Model.NickName;
+}
+<h2>
+    Welcome,
+    @if (!String.IsNullOrEmpty(Model.FigureUrl))
+    { <img src="@Model.FigureUrl" /> }
+    @Model.NickName
+</h2>
+<p>
+</p>

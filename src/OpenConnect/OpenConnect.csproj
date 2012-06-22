@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{41E5E41F-C769-41E3-B36A-56A1369E9691}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OpenConnect</RootNamespace>
+    <AssemblyName>OpenConnect</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Providers\AccessToken.cs" />
+    <Compile Include="Providers\Renren\RenrenApiUtil.cs" />
+    <Compile Include="Providers\Renren\RenrenOpenConnectProvider.cs" />
+    <Compile Include="Providers\Renren\RenrenUserInfoRetriever.cs" />
+    <Compile Include="Providers\StandardAccessTokenRetriever.cs" />
+    <Compile Include="AppInfo.cs" />
+    <Compile Include="Providers\StandardAuthorizationUrlBuilder.cs" />
+    <Compile Include="Config\ConfigurationException.cs" />
+    <Compile Include="Config\OpenConnectConfigurationReader.cs" />
+    <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
+    <Compile Include="Providers\Google\GetUserInfoResult.cs" />
+    <Compile Include="Providers\Google\GoogleAuthorizationUrlBuilder.cs" />
+    <Compile Include="Providers\Google\GoogleOpenConnectProvider.cs" />
+    <Compile Include="Providers\Google\GoogleUserInfoRetriever.cs" />
+    <Compile Include="Providers\HttpMethod.cs" />
+    <Compile Include="Providers\Live\GetUserInfoResult.cs" />
+    <Compile Include="Providers\Live\LiveOpenConnectProvider.cs" />
+    <Compile Include="Providers\Live\LiveUserInfoRetriever.cs" />
+    <Compile Include="OpenConnectClientManager.cs" />
+    <Compile Include="Config\ClientConfiguration.cs" />
+    <Compile Include="Providers\IAccessTokenRetriever.cs" />
+    <Compile Include="Providers\IAuthorizationUrlBuilder.cs" />
+    <Compile Include="Providers\IUserInfoRetriever.cs" />
+    <Compile Include="OpenConnectClient.cs" />
+    <Compile Include="Config\OpenConnectConfiguration.cs" />
+    <Compile Include="Providers\ProviderNotFoundException.cs" />
+    <Compile Include="Providers\QQ\QQUserInfoRetriever.cs" />
+    <Compile Include="Providers\HttpClient.cs" />
+    <Compile Include="ApiException.cs" />
+    <Compile Include="Check.cs" />
+    <Compile Include="Gender.cs" />
+    <Compile Include="Providers\IHttpClient.cs" />
+    <Compile Include="Providers\IOpenConnectProvider.cs" />
+    <Compile Include="Utils\JsonSerializer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\QQ\GetUserInfoResult.cs" />
+    <Compile Include="Providers\QQ\AccessTokenRequestResult.cs" />
+    <Compile Include="Providers\QQ\QQAccessTokenRetriever.cs" />
+    <Compile Include="Providers\QQ\QQOpenConnectProvider.cs" />
+    <Compile Include="ResponseType.cs" />
+    <Compile Include="UserInfo.cs" />
+    <Compile Include="Providers\UrlBuilder.cs" />
+    <Compile Include="Providers\Weibo\GetUIDResult.cs" />
+    <Compile Include="Providers\Weibo\GetUserInfoResult.cs" />
+    <Compile Include="Providers\Weibo\WeiboUserInfoRetriever.cs" />
+    <Compile Include="Providers\Weibo\WeiboOpenConnectProvider.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

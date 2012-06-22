@@ -1,0 +1,16 @@
+﻿@model List<OpenConnect.MvcExample.Models.LoginLink>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Login</h2>
+
+<div>
+@foreach (var link in Model)
+{
+    <div>
+        <a href="@link.Url">@link.Text</a>
+    </div>
+}
+</div>
