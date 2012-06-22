@@ -4,30 +4,26 @@ OpenConnect is a library aimed to provide an abstraction over different OAuth 2.
 
 ## How to use?
 
-```csharp
+	// 1. Create app in your connect service provider, for example, Google
+	var appInfo = new AppInfo(appId, appSecret, scope, redirectUri);
 
-// 1. Create app in your connect service provider, for example, Google
-var appInfo = new AppInfo(appId, appSecret, scope, redirectUri);
+	// 2. Instanciate a new OpenConnectClient instance
+	var client = new OpenConnectClient(appInfo, new GoogleOpenConnectProvider());
 
-// 2. Instanciate a new OpenConnectClient instance
-var client = new OpenConnectClient(appInfo, new GoogleOpenConnectProvider());
+	// 3. Build login url, and show it as a hyperlink in your website
+	var loginUrl = client.GetAuthUrl(null, RepsonseType.Code);
 
-// 3. Build login url, and show it as a hyperlink in your website
-var loginUrl = client.GetAuthUrl(null, RepsonseType.Code);
+	// 4. Visitors click login button -> go to login url -> enter username/password to login
+	// 5. Google redirects to your "redirectUri" with the authorization code
 
-// 4. Visitors click login button -> go to login url -> enter username/password to login
-// 5. Google redirects to your "redirectUri" with the authorization code
+	// 6. Retrieve access token with the authorization code returned from Google
+	var accessToken = client.GetAccessToken(autoCode);
 
-// 6. Retrieve access token with the authorization code returned from Google
-var accessToken = client.GetAccessToken(autoCode);
+	// 7. Retrieve user information with the returned access token in step 6
+	var userInfo = client.GetUserInfo(accessToken);
 
-// 7. Retrieve user information with the returned access token in step 6
-var userInfo = client.GetUserInfo(accessToken);
-
-// 8. Play with the returned user information
-var nickName = userInfo.NickName;
-
-```
+	// 8. Play with the returned user information
+	var nickName = userInfo.NickName;
 
 ## Setup sample application:
 
