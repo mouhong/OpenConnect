@@ -14,8 +14,8 @@ namespace OpenConnect.Providers
 
         public string Get(string url, NameValueCollection data, Encoding encoding)
         {
-            Check.RequireNotNullOrEmpty(url, "url");
-            Check.RequireNotNull(encoding, "encoding");
+            Require.NotNullOrEmpty(url, "url");
+            Require.NotNull(encoding, "encoding");
 
             if (data != null)
             {
@@ -43,8 +43,8 @@ namespace OpenConnect.Providers
 
         public string Post(string url, NameValueCollection data, Encoding encoding)
         {
-            Check.RequireNotNullOrEmpty(url, "url");
-            Check.RequireNotNull(encoding, "encoding");
+            Require.NotNullOrEmpty(url, "url");
+            Require.NotNull(encoding, "encoding");
 
             using (var client = new WebClient())
             {

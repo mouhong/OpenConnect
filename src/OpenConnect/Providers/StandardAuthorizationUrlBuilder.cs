@@ -11,14 +11,14 @@ namespace OpenConnect.Providers
 
         public StandardAuthorizationUrlBuilder(string apiPath)
         {
-            Check.RequireNotNullOrEmpty(apiPath, "apiPath");
+            Require.NotNullOrEmpty(apiPath, "apiPath");
 
             ApiPath = apiPath;
         }
 
         public string Build(AppInfo appInfo, string display, ResponseType responseType)
         {
-            Check.RequireNotNull(appInfo, "appInfo");
+            Require.NotNull(appInfo, "appInfo");
 
             var builder = UrlBuilder.Create(ApiPath)
                                     .WithParam("response_type", responseType == ResponseType.Code ? "code" : "token")

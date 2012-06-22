@@ -29,7 +29,7 @@ namespace OpenConnect.Utils
 
         public static object Deserialize(string json, Type objType)
         {
-            Check.RequireNotNull(objType, "objType");
+            Require.NotNull(objType, "objType");
 
             if (String.IsNullOrEmpty(json)) return null;
 

@@ -38,7 +38,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OpenConnectClientManager.cs" />
     <Compile Include="Providers\AccessToken.cs" />
+    <Compile Include="Providers\IOpenConnectProviderFactory.cs" />
+    <Compile Include="OpenConnectProviderFactories.cs" />
+    <Compile Include="Providers\OpenConnectProviderFactory.cs" />
     <Compile Include="Providers\Renren\RenrenApiUtil.cs" />
     <Compile Include="Providers\Renren\RenrenOpenConnectProvider.cs" />
     <Compile Include="Providers\Renren\RenrenUserInfoRetriever.cs" />
@@ -56,7 +60,6 @@
     <Compile Include="Providers\Live\GetUserInfoResult.cs" />
     <Compile Include="Providers\Live\LiveOpenConnectProvider.cs" />
     <Compile Include="Providers\Live\LiveUserInfoRetriever.cs" />
-    <Compile Include="OpenConnectClientManager.cs" />
     <Compile Include="Config\ClientConfiguration.cs" />
     <Compile Include="Providers\IAccessTokenRetriever.cs" />
     <Compile Include="Providers\IAuthorizationUrlBuilder.cs" />

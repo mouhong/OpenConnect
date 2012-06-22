@@ -10,8 +10,8 @@ namespace OpenConnect
     {
         public static NameValueCollection FluentAdd(this NameValueCollection nv, string name, string value)
         {
-            Check.RequireNotNull(nv, "nv");
-            Check.RequireNotNullOrEmpty(name, "name");
+            Require.NotNull(nv, "nv");
+            Require.NotNullOrEmpty(name, "name");
 
             nv.Add(name, value);
             return nv;
@@ -19,8 +19,8 @@ namespace OpenConnect
 
         public static NameValueCollection AddIfValueIsNotNullOrEmpty(this NameValueCollection nv, string name, string value)
         {
-            Check.RequireNotNull(nv, "nv");
-            Check.RequireNotNullOrEmpty(name, "name");
+            Require.NotNull(nv, "nv");
+            Require.NotNullOrEmpty(name, "name");
 
             if (!String.IsNullOrEmpty(value))
             {

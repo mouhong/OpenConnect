@@ -17,7 +17,7 @@ namespace OpenConnect.Providers
 
         public UrlBuilder(string path)
         {
-            Check.RequireNotNullOrEmpty(path, "path");
+            Require.NotNullOrEmpty(path, "path");
 
             Path = path;
             Parameters = new NameValueCollection();
@@ -31,7 +31,7 @@ namespace OpenConnect.Providers
 
         public UrlBuilder WithParam(string name, string value)
         {
-            Check.RequireNotNullOrEmpty(name, "name");
+            Require.NotNullOrEmpty(name, "name");
 
             Parameters[name] = value;
 

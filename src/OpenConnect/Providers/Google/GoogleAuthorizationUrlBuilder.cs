@@ -9,7 +9,7 @@ namespace OpenConnect.Providers.Google
     {
         public string Build(AppInfo appInfo, string display, ResponseType responseType)
         {
-            Check.RequireNotNull(appInfo, "appInfo");
+            Require.NotNull(appInfo, "appInfo");
 
             var builder = UrlBuilder.Create("https://accounts.google.com/o/oauth2/auth")
                                     .WithParam("response_type", responseType == ResponseType.Code ? "code" : "token")

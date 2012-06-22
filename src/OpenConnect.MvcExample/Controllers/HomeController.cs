@@ -11,18 +11,17 @@ namespace OpenConnect.MvcExample.Controllers
     {
         public ActionResult Index()
         {
-            var links = new List<LoginLink>();
-
-            foreach (var client in OpenConnectHelper.AllClients)
+            var links = new List<LoginLink>()
             {
-                var link = new LoginLink
-                {
-                    Text = "Login with " + client.Name,
-                    Url = client.GetAuthUrl(null, ResponseType.Code)
-                };
-
-                links.Add(link);
-            }
+                new LoginLink {
+                    Text = "QQ",
+                    Url = OpenConnectUtil.ClientManager.Find("QQ").GetAuthUrl(null, ResponseType.Code)
+                },
+                new LoginLink {
+                    Text = "Sina Weibo",
+                    Url = OpenConnectUtil.ClientManager.Find("Sina Weibo").GetAuthUrl(null, ResponseType.Code)
+                }
+            };
 
             return View(links);
         }

@@ -15,7 +15,7 @@ namespace OpenConnect.Providers
 
         public AccessToken(string token, DateTime expireTime, string refreshToken)
         {
-            Check.RequireNotNullOrEmpty(token, "token");
+            Require.NotNullOrEmpty(token, "token");
 
             Token = token;
             ExpireTime = expireTime;

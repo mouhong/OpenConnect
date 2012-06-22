@@ -33,8 +33,8 @@ namespace OpenConnect.Config
 
         public void AddClientConfig(ClientConfiguration config)
         {
-            Check.RequireNotNull(config, "config");
-            Check.Require(!ContainsClientConfig(config.Name), "A client with name \"" + config.Name + "\" already exists.");
+            Require.NotNull(config, "config");
+            Require.That(!ContainsClientConfig(config.Name), "A client with name \"" + config.Name + "\" already exists.");
 
             _clientConfigs.Add(config);
         }
@@ -53,7 +53,7 @@ namespace OpenConnect.Config
 
         public ClientConfiguration FindClientConfig(string name)
         {
-            Check.RequireNotNullOrEmpty(name, "name");
+            Require.NotNullOrEmpty(name, "name");
 
             return _clientConfigs.FirstOrDefault(it => it.Name == name);
         }

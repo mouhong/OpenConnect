@@ -11,7 +11,7 @@ namespace OpenConnect.Config
     {
         public static OpenConnectConfiguration ReadFrom(string filePath)
         {
-            Check.RequireNotNullOrEmpty(filePath, "filePath");
+            Require.NotNullOrEmpty(filePath, "filePath");
 
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("Cannot find OpenConnect configuration file in specified location.", filePath);

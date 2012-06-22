@@ -18,9 +18,9 @@ namespace OpenConnect
 
         public AppInfo(string appId, string appSecret, string scope, string redirectUri)
         {
-            Check.RequireNotNullOrEmpty(appId, "appId");
-            Check.RequireNotNullOrEmpty(appSecret, "appSecret");
-            Check.RequireNotNullOrEmpty(redirectUri, "redirectUri");
+            Require.NotNullOrEmpty(appId, "appId");
+            Require.NotNullOrEmpty(appSecret, "appSecret");
+            Require.NotNullOrEmpty(redirectUri, "redirectUri");
 
             AppId = appId;
             AppSecret = appSecret;

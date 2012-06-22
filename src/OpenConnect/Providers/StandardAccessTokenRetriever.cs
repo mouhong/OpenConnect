@@ -24,8 +24,8 @@ namespace OpenConnect.Providers
 
         public StandardAccessTokenRetriever(string apiPath, IHttpClient httpClient)
         {
-            Check.RequireNotNullOrEmpty(apiPath, "apiPath");
-            Check.RequireNotNull(httpClient, "httpClient");
+            Require.NotNullOrEmpty(apiPath, "apiPath");
+            Require.NotNull(httpClient, "httpClient");
 
             ApiPath = apiPath;
             HttpClient = httpClient;
@@ -33,8 +33,8 @@ namespace OpenConnect.Providers
 
         public AccessToken Retrieve(AppInfo appInfo, string authCode, string state)
         {
-            Check.RequireNotNull(appInfo, "appInfo");
-            Check.RequireNotNullOrEmpty(authCode, "authCode");
+            Require.NotNull(appInfo, "appInfo");
+            Require.NotNullOrEmpty(authCode, "authCode");
 
             var now = DateTime.Now;
             var response = GetResponse(appInfo, authCode, state);

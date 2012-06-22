@@ -18,7 +18,7 @@ namespace OpenConnect.Providers.Live
 
         public LiveUserInfoRetriever(IHttpClient httpClient)
         {
-            Check.RequireNotNull(httpClient, "httpClient");
+            Require.NotNull(httpClient, "httpClient");
 
             HttpClient = httpClient;
         }

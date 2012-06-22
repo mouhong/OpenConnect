@@ -13,17 +13,18 @@ namespace OpenConnect
         private IAccessTokenRetriever _accessTokenRetriever;
         private IUserInfoRetriever _userInfoRetriever;
 
-        public string Name { get; private set; }
-
         public AppInfo AppInfo { get; private set; }
 
-        public OpenConnectClient(string name, AppInfo appInfo, IOpenConnectProvider provider)
+        public OpenConnectClient(AppInfo appInfo, string openConnectProviderInvariantName)
+            : this(appInfo, OpenConnectProviderFactories.Current.GetProvider(openConnectProviderInvariantName))
         {
-            Check.RequireNotNullOrEmpty(name, "name");
-            Check.RequireNotNull(appInfo, "appInfo");
-            Check.RequireNotNull(provider, "provider");
+        }
 
-            Name = name;
+        public OpenConnectClient(AppInfo appInfo, IOpenConnectProvider provider)
+        {
+            Require.NotNull(appInfo, "appInfo");
+            Require.NotNull(provider, "provider");
+
             AppInfo = appInfo;
             _urlBuilder = provider.GetAuthorizationUrlBuilder();
             _accessTokenRetriever = provider.GetAccessTokenRetriever();

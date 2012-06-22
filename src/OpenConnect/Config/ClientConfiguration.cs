@@ -21,11 +21,11 @@ namespace OpenConnect.Config
 
         public ClientConfiguration(string name, string appId, string appSecret, string scope, string redirectUri, string provider)
         {
-            Check.RequireNotNullOrEmpty(name, "name");
-            Check.RequireNotNullOrEmpty(appId, "appId");
-            Check.RequireNotNullOrEmpty(appSecret, "appSecret");
-            Check.RequireNotNullOrEmpty(redirectUri, "redirectUri");
-            Check.RequireNotNullOrEmpty(provider, "provider");
+            Require.NotNullOrEmpty(name, "name");
+            Require.NotNullOrEmpty(appId, "appId");
+            Require.NotNullOrEmpty(appSecret, "appSecret");
+            Require.NotNullOrEmpty(redirectUri, "redirectUri");
+            Require.NotNullOrEmpty(provider, "provider");
 
             Name = name;
             AppId = appId;

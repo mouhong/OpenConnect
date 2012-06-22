@@ -19,15 +19,15 @@ namespace OpenConnect.Providers.Weibo
 
         public WeiboUserInfoRetriever(IHttpClient httpClient)
         {
-            Check.RequireNotNull(httpClient, "httpClient");
+            Require.NotNull(httpClient, "httpClient");
 
             HttpClient = httpClient;
         }
 
         public UserInfo Retrieve(AppInfo appInfo, string accessToken)
         {
-            Check.RequireNotNull(appInfo, "appInfo");
-            Check.RequireNotNullOrEmpty(accessToken, "accessToken");
+            Require.NotNull(appInfo, "appInfo");
+            Require.NotNullOrEmpty(accessToken, "accessToken");
 
             var uid = GetUserIdentity(accessToken);
             var userInfo = GetUserInfoByUserIdentity(accessToken, uid);

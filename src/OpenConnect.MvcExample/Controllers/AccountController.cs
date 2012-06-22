@@ -31,8 +31,10 @@ namespace OpenConnect.MvcExample.Controllers
 
         private UserInfo GetUserInfo(string clientName, string code)
         {
-            var client = OpenConnectHelper.FindClient(clientName);
+            var client = OpenConnectUtil.ClientManager.Find(clientName);
+
             var state = Guid.NewGuid().ToString("N");
+
             var token = client.GetAccessToken(code, state);
             var user = client.GetUserInfo(token.Token);
 

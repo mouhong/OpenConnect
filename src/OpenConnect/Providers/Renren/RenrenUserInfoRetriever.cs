@@ -19,7 +19,7 @@ namespace OpenConnect.Providers.Renren
 
         public RenrenUserInfoRetriever(IHttpClient httpClient)
         {
-            Check.RequireNotNull(httpClient, "httpClient");
+            Require.NotNull(httpClient, "httpClient");
 
             HttpClient = httpClient;
         }
