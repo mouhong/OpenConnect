@@ -11,7 +11,7 @@ namespace OpenConnect.Providers.Renren
         {
         }
 
-        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
+        public virtual ILoginUrlBuilder GetLoginUrlBuilder()
         {
             return new StandardLoginUrlBuilder("https://graph.renren.com/oauth/authorize");
         }

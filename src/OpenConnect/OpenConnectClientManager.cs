@@ -5,6 +5,9 @@ using System.Text;
 
 namespace OpenConnect
 {
+    /// <summary>
+    /// Manages a set of named <see cref="OpenConnect.OpenConnectClient"/>.
+    /// </summary>
     public class OpenConnectClientManager
     {
         private Dictionary<string, OpenConnectClient> _clients = new Dictionary<string, OpenConnectClient>();

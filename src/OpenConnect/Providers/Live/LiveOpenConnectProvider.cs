@@ -11,7 +11,7 @@ namespace OpenConnect.Providers.Live
         {
         }
 
-        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
+        public virtual ILoginUrlBuilder GetLoginUrlBuilder()
         {
             return new StandardLoginUrlBuilder("https://oauth.live.com/authorize");
         }

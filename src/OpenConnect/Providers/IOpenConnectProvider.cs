@@ -7,7 +7,7 @@ namespace OpenConnect.Providers
 {
     public interface IOpenConnectProvider
     {
-        ILoginUrlBuilder GetAuthorizationUrlBuilder();
+        ILoginUrlBuilder GetLoginUrlBuilder();
 
         IGetAccessTokenRequest CreateGetAccessTokenRequest();
 

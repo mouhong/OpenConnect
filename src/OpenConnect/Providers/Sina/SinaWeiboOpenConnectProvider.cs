@@ -11,7 +11,7 @@ namespace OpenConnect.Providers.Weibo
         {
         }
 
-        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
+        public virtual ILoginUrlBuilder GetLoginUrlBuilder()
         {
             return new StandardLoginUrlBuilder("https://api.weibo.com/oauth2/authorize");
         }

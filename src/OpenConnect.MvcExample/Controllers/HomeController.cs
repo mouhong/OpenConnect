@@ -21,12 +21,12 @@ namespace OpenConnect.MvcExample.Controllers
                 var link = new LoginLink
                 {
                     ImageUrl = "/Content/Images/connect-" + name.Replace(' ', '-') + ".png",
-                    NavigateUrl = client.GetLoginUrl(null, ResponseType.Code)
+                    NavigateUrl = client.BuildLoginUrl(null, ResponseType.Code)
                 };
 
                 links.Add(link);
             }
-
+            
             return View(links);
         }
 

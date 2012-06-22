@@ -15,8 +15,8 @@ namespace OpenConnect.MvcExample.Controllers
 
             var state = Guid.NewGuid().ToString("N");
 
-            var token = client.GetAccessToken(code, state);
-            var user = client.GetUserInfo(token.Token, openid);
+            var token = client.RetrieveAccessToken(code, state);
+            var user = client.RetrieveUserInfo(token.Token, openid);
 
             ViewBag.ClientName = clientName;
 

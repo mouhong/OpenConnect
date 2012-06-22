@@ -11,7 +11,7 @@ namespace OpenConnect.Providers.Tencent.Weibo
         {
         }
 
-        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
+        public virtual ILoginUrlBuilder GetLoginUrlBuilder()
         {
             return new StandardLoginUrlBuilder("https://open.t.qq.com/cgi-bin/oauth2/authorize");
         }

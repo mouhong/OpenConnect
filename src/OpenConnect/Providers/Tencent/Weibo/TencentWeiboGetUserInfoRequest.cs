@@ -40,7 +40,7 @@ namespace OpenConnect.Providers.Tencent.Weibo
             var result = (GetUserInfoResult)JsonSerializer.Deserialize(json, typeof(GetUserInfoResult));
 
             if (result.ret != 0)
-                throw new ApiException(result.msg + " Error code:  " + result.errcode);
+                throw new ApiException(result.msg, result.errcode.ToString());
 
             return result.data;
         }

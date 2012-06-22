@@ -11,7 +11,7 @@ namespace OpenConnect.Providers.Google
         {
         }
 
-        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
+        public virtual ILoginUrlBuilder GetLoginUrlBuilder()
         {
             return new GoogleAuthorizationUrlBuilder();
         }

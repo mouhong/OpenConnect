@@ -11,7 +11,7 @@ namespace OpenConnect.Providers.Tencent.QQ
         {
         }
 
-        public virtual ILoginUrlBuilder GetAuthorizationUrlBuilder()
+        public virtual ILoginUrlBuilder GetLoginUrlBuilder()
         {
             return new StandardLoginUrlBuilder("https://graph.qq.com/oauth2.0/authorize");
         }
