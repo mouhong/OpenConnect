@@ -5,7 +5,7 @@ using System.Text;
 using System.Collections.Specialized;
 using System.Web;
 
-namespace OpenConnect.Clients
+namespace OpenConnect.Utils
 {
     public class UrlBuilder
     {

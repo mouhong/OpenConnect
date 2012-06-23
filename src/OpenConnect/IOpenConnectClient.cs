@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OpenConnect.Utils;
 
-namespace OpenConnect.Clients
+namespace OpenConnect
 {
     public interface IOpenConnectClient
     {

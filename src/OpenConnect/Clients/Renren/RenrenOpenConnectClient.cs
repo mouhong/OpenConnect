@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenConnect.Clients.Utils;
+using OpenConnect.Utils;
 
 namespace OpenConnect.Clients.Renren
 {
     public class RenrenOpenConnectClient : IOpenConnectClient
     {
+        private IHttpClient _httpClient;
+
         public AppInfo AppInfo { get; private set; }
 
-        public IHttpClient HttpClient { get; private set; }
-
         public RenrenOpenConnectClient(AppInfo appInfo)
-            : this(appInfo, OpenConnect.Clients.HttpClient.Instance)
+            : this(appInfo, HttpClient.Instance)
         {
         }
 
         public RenrenOpenConnectClient(AppInfo appInfo, IHttpClient httpClient)
         {
             AppInfo = appInfo;
-            HttpClient = httpClient;
+            _httpClient = httpClient;
         }
 
         public string BuildLoginUrl(string display, ResponseType responseType)
@@ -33,7 +34,7 @@ namespace OpenConnect.Clients.Renren
         {
             var now = DateTime.Now;
 
-            var request = new GetAccessTokenRequest("https://graph.renren.com/oauth/token", HttpClient);
+            var request = new GetAccessTokenRequest("https://graph.renren.com/oauth/token", _httpClient);
             var response = request.GetResponse(AppInfo, authCode, state);
 
             return DefaultGetAccessTokenResponseParser.Parse(response, now);
@@ -41,7 +42,7 @@ namespace OpenConnect.Clients.Renren
 
         public IUserInfo GetUserInfo(string accessToken, string userId)
         {
-            return new RenrenGetUserInfoRequest(HttpClient)
+            return new RenrenGetUserInfoRequest(_httpClient)
             .GetResponse(AppInfo, accessToken);
         }
     }

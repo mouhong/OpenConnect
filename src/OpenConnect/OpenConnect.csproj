@@ -40,10 +40,10 @@
   <ItemGroup>
     <Compile Include="Clients\DefaultGetAccessTokenResponseParser.cs" />
     <Compile Include="OpenConnectClientManager.cs" />
-    <Compile Include="Clients\AccessTokenResponse.cs" />
+    <Compile Include="AccessTokenResponse.cs" />
     <Compile Include="Clients\Google\GoogleOpenConnectClient.cs" />
     <Compile Include="Clients\Google\GoogleUserInfo.cs" />
-    <Compile Include="Clients\IOpenConnectClient.cs" />
+    <Compile Include="IOpenConnectClient.cs" />
     <Compile Include="Clients\Live\LiveOpenConnectClient.cs" />
     <Compile Include="Clients\Renren\RenrenApiUtil.cs" />
     <Compile Include="Clients\Renren\RenrenOpenConnectClient.cs" />
@@ -54,7 +54,7 @@
     <Compile Include="Clients\Utils\LoginUrlBuilder.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Clients\Google\GoogleGetUserInfoRequest.cs" />
-    <Compile Include="Clients\HttpMethod.cs" />
+    <Compile Include="HttpMethod.cs" />
     <Compile Include="Clients\Live\LiveUserInfo.cs" />
     <Compile Include="Clients\Live\LiveGetUserInfoRequest.cs" />
     <Compile Include="Clients\Renren\RenrenUserInfo.cs" />
@@ -69,7 +69,7 @@
     <Compile Include="Clients\Taobao\UserCredit.cs" />
     <Compile Include="Clients\Taobao\UserStatus.cs" />
     <Compile Include="Clients\Tencent\QQ\QQGetUserInfoRequest.cs" />
-    <Compile Include="Clients\HttpClient.cs" />
+    <Compile Include="Utils\HttpClient.cs" />
     <Compile Include="ApiException.cs" />
     <Compile Include="Clients\Tencent\QQ\QQOpenConnectClient.cs" />
     <Compile Include="Clients\Tencent\QQ\QQUserInfo.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="Clients\Tencent\Weibo\TencentWeiboUserInfo.cs" />
     <Compile Include="Require.cs" />
     <Compile Include="Gender.cs" />
-    <Compile Include="Clients\IHttpClient.cs" />
+    <Compile Include="Utils\IHttpClient.cs" />
     <Compile Include="Utils\JsonSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clients\Tencent\QQ\GetUserInfoResult.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="Clients\Tencent\TencentGetAccessTokenResponseParser.cs" />
     <Compile Include="ResponseType.cs" />
     <Compile Include="IUserInfo.cs" />
-    <Compile Include="Clients\UrlBuilder.cs" />
+    <Compile Include="Utils\UrlBuilder.cs" />
     <Compile Include="Clients\Sina\SinaWeiboUserInfo.cs" />
     <Compile Include="Clients\Sina\SinaWeiboGetUserInfoRequest.cs" />
     <Compile Include="Utils\Md5Encryptor.cs" />

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OpenConnect.Utils;
 using OpenConnect.Clients.Utils;
 
 namespace OpenConnect.Clients.Taobao
 {
     public class TaobaoOpenConnectClient : IOpenConnectClient
     {
+        private IHttpClient _httpClient;
+
         public AppInfo AppInfo { get; private set; }
 
         public bool UseSandbox { get; set; }
@@ -25,19 +28,17 @@ namespace OpenConnect.Clients.Taobao
             }
         }
 
-        public IHttpClient HttpClient { get; private set; }
-
         public string UserFieldsToGet { get; set; }
 
         public TaobaoOpenConnectClient(AppInfo appInfo)
-            : this(appInfo, OpenConnect.Clients.HttpClient.Instance)
+            : this(appInfo, HttpClient.Instance)
         {
         }
 
         public TaobaoOpenConnectClient(AppInfo appInfo, IHttpClient httpClient)
         {
             AppInfo = appInfo;
-            HttpClient = httpClient;
+            _httpClient = httpClient;
         }
 
         public string BuildLoginUrl(string display, ResponseType responseType)
@@ -50,7 +51,7 @@ namespace OpenConnect.Clients.Taobao
         {
             var now = DateTime.Now;
 
-            var request = new GetAccessTokenRequest(BaseApiUri + "token", HttpClient)
+            var request = new GetAccessTokenRequest(BaseApiUri + "token", _httpClient)
             {
                 Method = HttpMethod.Post
             };
@@ -61,7 +62,7 @@ namespace OpenConnect.Clients.Taobao
 
         public IUserInfo GetUserInfo(string accessToken, string userId)
         {
-            var request = new TaobaoGetUserInfoRequest(UseSandbox, HttpClient);
+            var request = new TaobaoGetUserInfoRequest(UseSandbox, _httpClient);
 
             if (!String.IsNullOrEmpty(UserFieldsToGet))
             {

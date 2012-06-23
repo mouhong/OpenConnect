@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OpenConnect.Utils;
 using OpenConnect.Clients.Utils;
 
 namespace OpenConnect.Clients.Google
 {
     public class GoogleOpenConnectClient : IOpenConnectClient
     {
+        private IHttpClient _httpClient;
+
         public AppInfo AppInfo { get; private set; }
 
-        public IHttpClient HttpClient { get; private set; }
-
         public GoogleOpenConnectClient(AppInfo appInfo)
-            : this(appInfo, OpenConnect.Clients.HttpClient.Instance)
+            : this(appInfo, HttpClient.Instance)
         {
         }
 
         public GoogleOpenConnectClient(AppInfo appInfo, IHttpClient httpClient)
         {
             AppInfo = appInfo;
-            HttpClient = httpClient;
+            _httpClient = httpClient;
         }
 
         public string BuildLoginUrl(string display, ResponseType responseType)
@@ -35,7 +36,7 @@ namespace OpenConnect.Clients.Google
         {
             var now = DateTime.Now;
 
-            var request = new GetAccessTokenRequest("https://accounts.google.com/o/oauth2/token", HttpClient);
+            var request = new GetAccessTokenRequest("https://accounts.google.com/o/oauth2/token", _httpClient);
             var response = request.GetResponse(AppInfo, authCode, null);
 
             return DefaultGetAccessTokenResponseParser.Parse(response, now);
@@ -43,7 +44,7 @@ namespace OpenConnect.Clients.Google
 
         public IUserInfo GetUserInfo(string accessToken, string userId)
         {
-            return new GoogleGetUserInfoRequest(HttpClient).GetResponse(AppInfo, accessToken);
+            return new GoogleGetUserInfoRequest(_httpClient).GetResponse(AppInfo, accessToken);
         }
     }
 }

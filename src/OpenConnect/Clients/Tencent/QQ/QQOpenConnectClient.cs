@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OpenConnect.Utils;
 using OpenConnect.Clients.Utils;
 
 namespace OpenConnect.Clients.Tencent.QQ
 {
     public class QQOpenConnectClient : IOpenConnectClient
     {
+        private IHttpClient _httpClient;
+
         public AppInfo AppInfo { get; private set; }
 
-        public IHttpClient HttpClient { get; private set; }
-
         public QQOpenConnectClient(AppInfo appInfo)
-            : this(appInfo, OpenConnect.Clients.HttpClient.Instance)
+            : this(appInfo, HttpClient.Instance)
         {
         }
 
         public QQOpenConnectClient(AppInfo appInfo, IHttpClient httpClient)
         {
             AppInfo = appInfo;
-            HttpClient = httpClient;
+            _httpClient = httpClient;
         }
 
         public string BuildLoginUrl(string display, ResponseType responseType)
@@ -33,7 +34,7 @@ namespace OpenConnect.Clients.Tencent.QQ
         {
             var now = DateTime.Now;
 
-            var request = new GetAccessTokenRequest("https://graph.qq.com/oauth2.0/token", HttpClient);
+            var request = new GetAccessTokenRequest("https://graph.qq.com/oauth2.0/token", _httpClient);
             var response = request.GetResponse(AppInfo, authCode, state);
 
             return TencentGetAccessTokenResponseParser.Parse(response, now);
@@ -41,7 +42,7 @@ namespace OpenConnect.Clients.Tencent.QQ
 
         public IUserInfo GetUserInfo(string accessToken, string userId)
         {
-            return new QQGetUserInfoRequest(HttpClient)
+            return new QQGetUserInfoRequest(_httpClient)
             .GetResponse(AppInfo, accessToken);
         }
     }

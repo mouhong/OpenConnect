@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenConnect.Clients.Utils;
+using OpenConnect.Utils;
 
 namespace OpenConnect.Clients.Sina
 {
     public class SinaWeiboOpenConnectClient : IOpenConnectClient
     {
+        private IHttpClient _httpClient;
+
         public AppInfo AppInfo { get; private set; }
 
-        public IHttpClient HttpClient { get; private set; }
-
         public SinaWeiboOpenConnectClient(AppInfo appInfo)
-            : this(appInfo, OpenConnect.Clients.HttpClient.Instance)
+            : this(appInfo, HttpClient.Instance)
         {
         }
 
         public SinaWeiboOpenConnectClient(AppInfo appInfo, IHttpClient httpClient)
         {
             AppInfo = appInfo;
-            HttpClient = httpClient;
+            _httpClient = httpClient;
         }
 
         public string BuildLoginUrl(string display, ResponseType responseType)
@@ -33,7 +34,7 @@ namespace OpenConnect.Clients.Sina
         {
             var now = DateTime.Now;
 
-            var request = new GetAccessTokenRequest("https://api.weibo.com/oauth2/access_token", HttpClient)
+            var request = new GetAccessTokenRequest("https://api.weibo.com/oauth2/access_token", _httpClient)
             {
                 Method = HttpMethod.Post
             };
@@ -44,7 +45,7 @@ namespace OpenConnect.Clients.Sina
 
         public IUserInfo GetUserInfo(string accessToken, string userId)
         {
-            return new SinaWeiboGetUserInfoRequest(HttpClient)
+            return new SinaWeiboGetUserInfoRequest(_httpClient)
             .GetResponse(AppInfo, accessToken);
         }
     }

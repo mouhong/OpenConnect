@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenConnect.Clients.Utils;
+using OpenConnect.Utils;
 
 namespace OpenConnect.Clients.Live
 {
     public class LiveOpenConnectClient : IOpenConnectClient
     {
+        private IHttpClient _httpClient;
+
         public AppInfo AppInfo { get; private set; }
 
-        public IHttpClient HttpClient { get; private set; }
-
         public LiveOpenConnectClient(AppInfo appInfo)
-            : this(appInfo, OpenConnect.Clients.HttpClient.Instance)
+            : this(appInfo, HttpClient.Instance)
         {
         }
 
         public LiveOpenConnectClient(AppInfo appInfo, IHttpClient httpClient)
         {
             AppInfo = appInfo;
-            HttpClient = httpClient;
+            _httpClient = httpClient;
         }
 
         public string BuildLoginUrl(string display, ResponseType responseType)
@@ -33,7 +34,7 @@ namespace OpenConnect.Clients.Live
         {
             var now = DateTime.Now;
 
-            var request = new GetAccessTokenRequest("https://oauth.live.com/token", HttpClient)
+            var request = new GetAccessTokenRequest("https://oauth.live.com/token", _httpClient)
             {
                 Method = HttpMethod.Get
             };
@@ -44,7 +45,7 @@ namespace OpenConnect.Clients.Live
 
         public IUserInfo GetUserInfo(string accessToken, string userId)
         {
-            return new LiveGetUserInfoRequest(HttpClient).GetResponse(AppInfo, accessToken);
+            return new LiveGetUserInfoRequest(_httpClient).GetResponse(AppInfo, accessToken);
         }
     }
 }
