@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OpenConnect.Clients;
 
 namespace OpenConnect
 {
     /// <summary>
-    /// Manages a set of named <see cref="OpenConnect.OpenConnectClient"/>.
+    /// Manages a set of named <see cref="T:OpenConnect.Clients.IOpenConnectClient"/>.
     /// </summary>
     public class OpenConnectClientManager
     {
-        private Dictionary<string, OpenConnectClient> _clients = new Dictionary<string, OpenConnectClient>();
+        private Dictionary<string, IOpenConnectClient> _clients = new Dictionary<string, IOpenConnectClient>();
 
         public IEnumerable<string> ClientNames
         {
@@ -20,7 +21,7 @@ namespace OpenConnect
             }
         }
 
-        public IEnumerable<OpenConnectClient> Clients
+        public IEnumerable<IOpenConnectClient> Clients
         {
             get
             {
@@ -32,9 +33,9 @@ namespace OpenConnect
         {
         }
 
-        public OpenConnectClient Find(string name)
+        public IOpenConnectClient Find(string name)
         {
-            OpenConnectClient client = null;
+            IOpenConnectClient client = null;
 
             if (_clients.TryGetValue(name, out client))
             {
@@ -44,7 +45,7 @@ namespace OpenConnect
             return null;
         }
 
-        public void Add(string name, OpenConnectClient client)
+        public void Add(string name, IOpenConnectClient client)
         {
             _clients.Add(name, client);
         }
