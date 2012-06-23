@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using OpenConnect.Providers.Tencent.QQ;
-using OpenConnect.Providers.Weibo;
+using OpenConnect.Providers.Sina;
 using OpenConnect.Providers.Renren;
 using OpenConnect.Providers.Live;
 using OpenConnect.Providers.Google;

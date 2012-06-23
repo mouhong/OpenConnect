@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OpenConnect.Providers.Weibo
+namespace OpenConnect.Providers.Sina
 {
     public class SinaWeiboOpenConnectProvider : IOpenConnectProvider
     {

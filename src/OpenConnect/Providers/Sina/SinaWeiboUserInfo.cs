@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 
-namespace OpenConnect.Providers.Weibo
+namespace OpenConnect.Providers.Sina
 {
     [DataContract]
     public class SinaWeiboUserInfo: IUserInfo

@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 
 using OpenConnect.Utils;
 
-namespace OpenConnect.Providers.Weibo
+namespace OpenConnect.Providers.Sina
 {
     public class SinaWeiboGetUserInfoRequest : IGetUserInfoRequest
     {
