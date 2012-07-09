@@ -10,9 +10,9 @@ namespace OpenConnect
     {
         AppInfo AppInfo { get; }
 
-        string BuildLoginUrl(string display, ResponseType responseType);
+        string BuildLoginUrl(ResponseType responseType, string redirectUri, string scope, string display);
 
-        AccessTokenResponse GetAccessToken(string authCode, string state);
+        AccessTokenResponse GetAccessToken(string authCode, string redirectUri, string state);
 
         IUserInfo GetUserInfo(string accessToken, string userId);
     }

@@ -25,7 +25,7 @@ namespace OpenConnect.Clients.Tencent.Weibo
             var url = UrlBuilder.Create("https://open.t.qq.com/api/user/info")
                                 .WithParam("oauth_consumer_key", appInfo.AppId)
                                 .WithParam("access_token", accessToken)
-                                .WithParam("scope", appInfo.Scope)
+                                .WithParam("scope", appInfo.DefaultScope)
                                 .WithParam("oauth_version", "2.a")
                                 .WithParam("openid", userId)
                                 .Build();

@@ -41,13 +41,13 @@ namespace OpenConnect.Clients.Taobao
             _httpClient = httpClient;
         }
 
-        public string BuildLoginUrl(string display, ResponseType responseType)
+        public string BuildLoginUrl(ResponseType responseType, string redirectUri, string scope, string display)
         {
             return new LoginUrlBuilder(BaseApiUri + "authorize")
-                        .Build(AppInfo, display, responseType);
+                        .Build(AppInfo, responseType, redirectUri, scope, display);
         }
 
-        public AccessTokenResponse GetAccessToken(string authCode, string state)
+        public AccessTokenResponse GetAccessToken(string authCode, string redirectUri, string state)
         {
             var now = DateTime.Now;
 
@@ -55,7 +55,7 @@ namespace OpenConnect.Clients.Taobao
             {
                 Method = HttpMethod.Post
             };
-            var response = request.GetResponse(AppInfo, authCode, state);
+            var response = request.GetResponse(AppInfo, authCode, redirectUri, state);
 
             return DefaultGetAccessTokenResponseParser.Parse(response, now);
         }

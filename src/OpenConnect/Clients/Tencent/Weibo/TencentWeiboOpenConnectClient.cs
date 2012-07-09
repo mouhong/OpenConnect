@@ -24,18 +24,18 @@ namespace OpenConnect.Clients.Tencent.Weibo
             _httpClient = httpClient;
         }
 
-        public string BuildLoginUrl(string display, ResponseType responseType)
+        public string BuildLoginUrl(ResponseType responseType, string redirectUri, string scope, string display)
         {
             return new LoginUrlBuilder("https://open.t.qq.com/cgi-bin/oauth2/authorize")
-            .Build(AppInfo, display, responseType);
+            .Build(AppInfo, responseType, redirectUri, scope, display);
         }
 
-        public AccessTokenResponse GetAccessToken(string authCode, string state)
+        public AccessTokenResponse GetAccessToken(string authCode, string redirectUri, string state)
         {
             var now = DateTime.Now;
 
             var request = new GetAccessTokenRequest("https://open.t.qq.com/cgi-bin/oauth2/access_token", _httpClient);
-            var response = request.GetResponse(AppInfo, authCode, state);
+            var response = request.GetResponse(AppInfo, authCode, redirectUri, state);
 
             return TencentGetAccessTokenResponseParser.Parse(response, now);
         }

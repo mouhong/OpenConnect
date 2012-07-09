@@ -19,23 +19,23 @@ namespace OpenConnect.Clients.Sina
         [DataMember] string description = null;
         [DataMember] string url = null;
         [DataMember] string profile_image_url = null;
-        [DataMember] string domain;
+        [DataMember] string domain = null;
         [DataMember] string gender = null;
-        [DataMember] int followers_count;
-        [DataMember] int friends_count;
-        [DataMember] int statuses_count;
-        [DataMember] int favourites_count;
-        [DataMember] string created_at;
-        [DataMember] bool following;
-        [DataMember] bool allow_all_act_msg;
-        [DataMember] bool geo_enabled;
-        [DataMember] bool verified;
-        [DataMember] bool allow_all_comment;
-        [DataMember] string avatar_large;
-        [DataMember] string verified_reason;
-        [DataMember] bool follow_me;
-        [DataMember] int online_status;
-        [DataMember] int bi_followers_count;
+        [DataMember] int followers_count = 0;
+        [DataMember] int friends_count = 0;
+        [DataMember] int statuses_count = 0;
+        [DataMember] int favourites_count = 0;
+        [DataMember] string created_at = null;
+        [DataMember] bool following = false;
+        [DataMember] bool allow_all_act_msg = false;
+        [DataMember] bool geo_enabled = false;
+        [DataMember] bool verified = false;
+        [DataMember] bool allow_all_comment = false;
+        [DataMember] string avatar_large = null;
+        [DataMember] string verified_reason = null;
+        [DataMember] bool follow_me = false;
+        [DataMember] int online_status = 0;
+        [DataMember] int bi_followers_count = 0;
 
         public string Id
         {
@@ -50,6 +50,30 @@ namespace OpenConnect.Clients.Sina
             get
             {
                 return screen_name;
+            }
+        }
+
+        public string FriendlyName
+        {
+            get
+            {
+                return name;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+        }
+
+        public string BlogUrl
+        {
+            get
+            {
+                return url;
             }
         }
 
@@ -87,6 +111,30 @@ namespace OpenConnect.Clients.Sina
             get
             {
                 return domain;
+            }
+        }
+
+        public int Province
+        {
+            get
+            {
+                return province;
+            }
+        }
+
+        public int City
+        {
+            get
+            {
+                return city;
+            }
+        }
+
+        public string Location
+        {
+            get
+            {
+                return location;
             }
         }
 
@@ -141,7 +189,7 @@ namespace OpenConnect.Clients.Sina
         {
             get
             {
-                return DateTime.ParseExact(created_at, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                return DateTime.ParseExact(created_at, "ddd MMM dd HH:mm:ss K yyyy", CultureInfo.InvariantCulture);
             }
         }
 

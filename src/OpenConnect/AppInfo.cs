@@ -24,23 +24,21 @@ namespace OpenConnect
         /// <summary>
         /// The scope of resources to access. Multiple scopes are separated with comma.
         /// </summary>
-        public string Scope { get; private set; }
+        public string DefaultScope { get; set; }
 
-        /// <summary>
-        /// A callback uri for the authorization process.
-        /// </summary>
-        public string RedirectUri { get; private set; }
+        public AppInfo(string appId, string appSecret)
+            : this(appId, appSecret, null)
+        {
+        }
 
-        public AppInfo(string appId, string appSecret, string scope, string redirectUri)
+        public AppInfo(string appId, string appSecret, string defaultScope)
         {
             Require.NotNullOrEmpty(appId, "appId");
             Require.NotNullOrEmpty(appSecret, "appSecret");
-            Require.NotNullOrEmpty(redirectUri, "redirectUri");
 
             AppId = appId;
             AppSecret = appSecret;
-            Scope = scope;
-            RedirectUri = redirectUri;
+            DefaultScope = defaultScope;
         }
     }
 }

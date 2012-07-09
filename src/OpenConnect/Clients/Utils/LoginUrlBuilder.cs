@@ -33,15 +33,15 @@ namespace OpenConnect.Clients.Utils
             DisplayParamName = "display";
         }
 
-        public string Build(AppInfo appInfo, string display, ResponseType responseType)
+        public string Build(AppInfo appInfo, ResponseType responseType, string redirectUri, string scope, string display)
         {
             Require.NotNull(appInfo, "appInfo");
 
             var builder = UrlBuilder.Create(ApiPath)
                                     .WithParam(ResponseTypeParamName, responseType == ResponseType.Code ? "code" : "token")
                                     .WithParam(ClientIdParamName, appInfo.AppId)
-                                    .WithParam(RedirectUriParamName, appInfo.RedirectUri)
-                                    .WithParam(ScopeParamName, appInfo.Scope)
+                                    .WithParam(RedirectUriParamName, redirectUri)
+                                    .WithParam(ScopeParamName, String.IsNullOrEmpty(scope) ? appInfo.DefaultScope : scope)
                                     .WithParam(DisplayParamName, display);
 
             return builder.Build();

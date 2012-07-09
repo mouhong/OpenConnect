@@ -26,12 +26,12 @@ namespace OpenConnect.Clients.Utils
             HttpClient = httpClient;
         }
 
-        public string GetResponse(AppInfo appInfo, string authCode, string state)
+        public string GetResponse(AppInfo appInfo, string authCode, string redirectUri, string state)
         {
             Require.NotNull(appInfo, "appInfo");
             Require.NotNullOrEmpty(authCode, "authCode");
 
-            var data = BuildRequestParameters(appInfo, authCode, state);
+            var data = BuildRequestParameters(appInfo, authCode, redirectUri, state);
 
             if (Method == HttpMethod.Get)
             {
@@ -41,11 +41,11 @@ namespace OpenConnect.Clients.Utils
             return HttpClient.Post(ApiPath, data, Encoding.UTF8);
         }
 
-        private NameValueCollection BuildRequestParameters(AppInfo appInfo, string authCode, string state)
+        private NameValueCollection BuildRequestParameters(AppInfo appInfo, string authCode, string redirectUri, string state)
         {
             var data = new NameValueCollection().FluentAdd("client_id", appInfo.AppId)
                                                 .FluentAdd("client_secret", appInfo.AppSecret)
-                                                .FluentAdd("redirect_uri", appInfo.RedirectUri)
+                                                .FluentAdd("redirect_uri", redirectUri)
                                                 .FluentAdd("code", authCode)
                                                 .FluentAdd("grant_type", "authorization_code")
                                                 .AddIfValueIsNotNullOrEmpty("state", state);
