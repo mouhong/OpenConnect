@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace OpenConnect.Clients.Google
 {
-    [DataContract]
+    [DataContract, Serializable]
     public class GoogleUserInfo : IUserInfo
     {
         [DataMember] string id = null;

@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace OpenConnect.Clients.Tencent.Weibo
 {
-    [DataContract]
+    [DataContract, Serializable]
     public class TencentWeiboUserInfo : IUserInfo
     {
         [DataMember] string name = null;

@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace OpenConnect.Clients.Live
 {
-    [DataContract]
+    [DataContract, Serializable]
     public class LiveUserInfo : IUserInfo
     {
         [DataMember] string id = null;

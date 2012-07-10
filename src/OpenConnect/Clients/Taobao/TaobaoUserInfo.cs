@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace OpenConnect.Clients.Taobao
 {
-    [DataContract]
+    [DataContract, Serializable]
     public class TaobaoUserInfo : IUserInfo
     {
         [DataMember] string uid = null;

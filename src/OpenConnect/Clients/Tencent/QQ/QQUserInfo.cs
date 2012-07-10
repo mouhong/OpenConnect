@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace OpenConnect.Clients.Tencent.QQ
 {
-    [DataContract]
+    [DataContract, Serializable]
     public class QQUserInfo : IUserInfo
     {
         [DataMember] string nickname = null;

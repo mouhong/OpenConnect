@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace OpenConnect.Clients.Sina
 {
-    [DataContract]
+    [DataContract, Serializable]
     public class SinaWeiboUserInfo: IUserInfo
     {
         [DataMember] string id = null;

@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace OpenConnect.Clients.Renren
 {
-    [DataContract]
+    [DataContract, Serializable]
     public class RenrenUserInfo : IUserInfo
     {
         [DataMember] string uid = null;
