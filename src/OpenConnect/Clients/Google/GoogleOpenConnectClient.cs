@@ -24,27 +24,31 @@ namespace OpenConnect.Clients.Google
             _httpClient = httpClient;
         }
 
-        public string BuildLoginUrl(ResponseType responseType, string redirectUri, string scope, string display)
+        public string GetAuthorizationUrl(AuthorizationUrlParameters parameters)
         {
             var builder = new LoginUrlBuilder("https://accounts.google.com/o/oauth2/auth");
             builder.DisplayParamName = "approval_prompt";
+            builder.OtherParameters = parameters.OtherParameters;
 
-            return builder.Build(AppInfo, responseType, redirectUri, scope, display);
+            return builder.Build(AppInfo, parameters.ResponseType, parameters.RedirectUri, parameters.Scope, parameters.Display);
         }
 
-        public AccessTokenResponse GetAccessToken(string authCode, string redirectUri, string state)
+        public AccessTokenResponse GetAccessToken(AccessTokenRequestParameters parameters)
         {
             var now = DateTime.Now;
 
+            // state must be null in google
+            parameters.State = null;
+
             var request = new GetAccessTokenRequest("https://accounts.google.com/o/oauth2/token", _httpClient);
-            var response = request.GetResponse(AppInfo, authCode, redirectUri, null);
+            var response = request.GetResponse(AppInfo, parameters);
 
             return DefaultGetAccessTokenResponseParser.Parse(response, now);
         }
 
-        public IUserInfo GetUserInfo(string accessToken, string userId)
+        public IUserInfo GetUserInfo(UserInfoRequestParameters parameters)
         {
-            return new GoogleGetUserInfoRequest(_httpClient).GetResponse(AppInfo, accessToken);
+            return new GoogleGetUserInfoRequest(_httpClient).GetResponse(AppInfo, parameters.AccessToken);
         }
     }
 }

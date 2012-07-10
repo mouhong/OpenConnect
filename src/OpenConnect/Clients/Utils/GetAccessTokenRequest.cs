@@ -26,12 +26,12 @@ namespace OpenConnect.Clients.Utils
             HttpClient = httpClient;
         }
 
-        public string GetResponse(AppInfo appInfo, string authCode, string redirectUri, string state)
+        public string GetResponse(AppInfo appInfo, AccessTokenRequestParameters parameters)
         {
             Require.NotNull(appInfo, "appInfo");
-            Require.NotNullOrEmpty(authCode, "authCode");
+            Require.NotNull(parameters, "parameters");
 
-            var data = BuildRequestParameters(appInfo, authCode, redirectUri, state);
+            var data = BuildRequestParameters(appInfo, parameters);
 
             if (Method == HttpMethod.Get)
             {
@@ -41,14 +41,22 @@ namespace OpenConnect.Clients.Utils
             return HttpClient.Post(ApiPath, data, Encoding.UTF8);
         }
 
-        private NameValueCollection BuildRequestParameters(AppInfo appInfo, string authCode, string redirectUri, string state)
+        private NameValueCollection BuildRequestParameters(AppInfo appInfo, AccessTokenRequestParameters parameters)
         {
             var data = new NameValueCollection().FluentAdd("client_id", appInfo.AppId)
                                                 .FluentAdd("client_secret", appInfo.AppSecret)
-                                                .FluentAdd("redirect_uri", redirectUri)
-                                                .FluentAdd("code", authCode)
+                                                .FluentAdd("redirect_uri", parameters.RedirectUri)
+                                                .FluentAdd("code", parameters.AuthorizationCode)
                                                 .FluentAdd("grant_type", "authorization_code")
-                                                .AddIfValueIsNotNullOrEmpty("state", state);
+                                                .AddIfValueIsNotNullOrEmpty("state", parameters.State);
+
+            if (parameters.OtherParameters != null && parameters.OtherParameters.Count > 0)
+            {
+                foreach (var key in parameters.OtherParameters.AllKeys)
+                {
+                    data.Add(key, parameters.OtherParameters[key]);
+                }
+            }
 
             return data;
         }

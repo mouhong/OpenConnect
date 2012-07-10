@@ -24,26 +24,33 @@ namespace OpenConnect.Clients.Tencent.Weibo
             _httpClient = httpClient;
         }
 
-        public string BuildLoginUrl(ResponseType responseType, string redirectUri, string scope, string display)
+        public string GetAuthorizationUrl(AuthorizationUrlParameters parameters)
         {
             return new LoginUrlBuilder("https://open.t.qq.com/cgi-bin/oauth2/authorize")
-            .Build(AppInfo, responseType, redirectUri, scope, display);
+            {
+                OtherParameters = parameters.OtherParameters
+            }
+            .Build(AppInfo, parameters.ResponseType, parameters.RedirectUri, parameters.Scope, parameters.Display);
         }
 
-        public AccessTokenResponse GetAccessToken(string authCode, string redirectUri, string state)
+        public AccessTokenResponse GetAccessToken(AccessTokenRequestParameters parameters)
         {
             var now = DateTime.Now;
 
             var request = new GetAccessTokenRequest("https://open.t.qq.com/cgi-bin/oauth2/access_token", _httpClient);
-            var response = request.GetResponse(AppInfo, authCode, redirectUri, state);
+            var response = request.GetResponse(AppInfo, parameters);
 
             return TencentGetAccessTokenResponseParser.Parse(response, now);
         }
 
-        public IUserInfo GetUserInfo(string accessToken, string userId)
+        public IUserInfo GetUserInfo(UserInfoRequestParameters parameters)
         {
-            return new TencentWeiboGetUserInfoRequest(_httpClient)
-                .GetResponse(AppInfo, accessToken, userId);
+            var openid = parameters.OtherParameters["openid"];
+
+            if (String.IsNullOrEmpty(openid))
+                throw new ApiException("Requires 'openid' parameter.");
+
+            return new TencentWeiboGetUserInfoRequest(_httpClient).GetResponse(AppInfo, parameters.AccessToken, openid);
         }
     }
 }

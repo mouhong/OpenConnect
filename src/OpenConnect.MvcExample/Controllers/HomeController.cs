@@ -21,7 +21,7 @@ namespace OpenConnect.MvcExample.Controllers
                 var link = new LoginLink
                 {
                     ImageUrl = "/Content/Images/connect-" + name.Replace(' ', '-') + ".png",
-                    NavigateUrl = client.BuildLoginUrl(ResponseType.Code, "http://test.sigcms.com/LoginCallback?clientName=" + name, null, null)
+                    NavigateUrl = client.GetAuthorizationUrl(new AuthorizationUrlParameters(ResponseType.Code, "http://test.sigcms.com/LoginCallback?clientName=" + name))
                 };
 
                 links.Add(link);

@@ -41,13 +41,16 @@ namespace OpenConnect.Clients.Taobao
             _httpClient = httpClient;
         }
 
-        public string BuildLoginUrl(ResponseType responseType, string redirectUri, string scope, string display)
+        public string GetAuthorizationUrl(AuthorizationUrlParameters parameters)
         {
             return new LoginUrlBuilder(BaseApiUri + "authorize")
-                        .Build(AppInfo, responseType, redirectUri, scope, display);
+            {
+                OtherParameters = parameters.OtherParameters
+            }
+            .Build(AppInfo, parameters.ResponseType, parameters.RedirectUri, parameters.Scope, parameters.Display);
         }
 
-        public AccessTokenResponse GetAccessToken(string authCode, string redirectUri, string state)
+        public AccessTokenResponse GetAccessToken(AccessTokenRequestParameters parameters)
         {
             var now = DateTime.Now;
 
@@ -55,12 +58,12 @@ namespace OpenConnect.Clients.Taobao
             {
                 Method = HttpMethod.Post
             };
-            var response = request.GetResponse(AppInfo, authCode, redirectUri, state);
+            var response = request.GetResponse(AppInfo, parameters);
 
             return DefaultGetAccessTokenResponseParser.Parse(response, now);
         }
 
-        public IUserInfo GetUserInfo(string accessToken, string userId)
+        public IUserInfo GetUserInfo(UserInfoRequestParameters parameters)
         {
             var request = new TaobaoGetUserInfoRequest(UseSandbox, _httpClient);
 
@@ -69,7 +72,7 @@ namespace OpenConnect.Clients.Taobao
                 request.FieldsToGet = UserFieldsToGet;
             }
 
-            return request.GetResponse(AppInfo, accessToken);
+            return request.GetResponse(AppInfo, parameters.AccessToken);
         }
     }
 }

@@ -15,8 +15,8 @@ namespace OpenConnect.MvcExample.Controllers
 
             var state = Guid.NewGuid().ToString("N");
 
-            var token = client.GetAccessToken(code, "http://test.sigcms.com/LoginCallback?clientName=" + clientName, null);
-            var user = client.GetUserInfo(token.AccessToken, openid);
+            var token = client.GetAccessToken(new AccessTokenRequestParameters(code, "http://test.sigcms.com/LoginCallback?clientName=" + clientName));
+            var user = client.GetUserInfo(new UserInfoRequestParameters(token.AccessToken).WithOtherParameter("openid", openid));
 
             ViewBag.ClientName = clientName;
 

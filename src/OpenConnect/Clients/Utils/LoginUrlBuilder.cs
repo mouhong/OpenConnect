@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenConnect.Utils;
+using System.Collections.Specialized;
 
 namespace OpenConnect.Clients.Utils
 {
@@ -19,6 +20,8 @@ namespace OpenConnect.Clients.Utils
         public string ScopeParamName { get; set; }
 
         public string DisplayParamName { get; set; }
+
+        public NameValueCollection OtherParameters { get; set; }
 
         public LoginUrlBuilder(string apiPath)
         {
@@ -43,6 +46,14 @@ namespace OpenConnect.Clients.Utils
                                     .WithParam(RedirectUriParamName, redirectUri)
                                     .WithParam(ScopeParamName, String.IsNullOrEmpty(scope) ? appInfo.DefaultScope : scope)
                                     .WithParam(DisplayParamName, display);
+
+            if (OtherParameters != null && OtherParameters.Count > 0)
+            {
+                foreach (var key in OtherParameters.AllKeys)
+                {
+                    builder.WithParam(key, OtherParameters[key]);
+                }
+            }
 
             return builder.Build();
         }

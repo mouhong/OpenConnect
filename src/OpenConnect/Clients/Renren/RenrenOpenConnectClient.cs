@@ -24,26 +24,29 @@ namespace OpenConnect.Clients.Renren
             _httpClient = httpClient;
         }
 
-        public string BuildLoginUrl(ResponseType responseType, string redirectUri, string scope, string display)
+        public string GetAuthorizationUrl(AuthorizationUrlParameters parameters)
         {
             return new LoginUrlBuilder("https://graph.renren.com/oauth/authorize")
-                .Build(AppInfo, responseType, redirectUri, scope, display);
+            {
+                OtherParameters = parameters.OtherParameters
+            }
+            .Build(AppInfo, parameters.ResponseType, parameters.RedirectUri, parameters.Scope, parameters.Display);
         }
 
-        public AccessTokenResponse GetAccessToken(string authCode, string redirectUri, string state)
+        public AccessTokenResponse GetAccessToken(AccessTokenRequestParameters parameters)
         {
             var now = DateTime.Now;
 
             var request = new GetAccessTokenRequest("https://graph.renren.com/oauth/token", _httpClient);
-            var response = request.GetResponse(AppInfo, authCode, redirectUri, state);
+            var response = request.GetResponse(AppInfo, parameters);
 
             return DefaultGetAccessTokenResponseParser.Parse(response, now);
         }
 
-        public IUserInfo GetUserInfo(string accessToken, string userId)
+        public IUserInfo GetUserInfo(UserInfoRequestParameters parameters)
         {
             return new RenrenGetUserInfoRequest(_httpClient)
-            .GetResponse(AppInfo, accessToken);
+            .GetResponse(AppInfo, parameters.AccessToken);
         }
     }
 }

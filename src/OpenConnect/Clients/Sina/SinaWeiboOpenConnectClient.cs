@@ -24,13 +24,16 @@ namespace OpenConnect.Clients.Sina
             _httpClient = httpClient;
         }
 
-        public string BuildLoginUrl(ResponseType responseType, string redirectUri, string scope, string display)
+        public string GetAuthorizationUrl(AuthorizationUrlParameters parameters)
         {
             return new LoginUrlBuilder("https://api.weibo.com/oauth2/authorize")
-                        .Build(AppInfo, responseType, redirectUri, scope, display);
+            {
+                OtherParameters = parameters.OtherParameters
+            }
+            .Build(AppInfo, parameters.ResponseType, parameters.RedirectUri, parameters.Scope, parameters.Display);
         }
 
-        public AccessTokenResponse GetAccessToken(string authCode, string redirectUri, string state)
+        public AccessTokenResponse GetAccessToken(AccessTokenRequestParameters parameters)
         {
             var now = DateTime.Now;
 
@@ -38,15 +41,14 @@ namespace OpenConnect.Clients.Sina
             {
                 Method = HttpMethod.Post
             };
-            var response = request.GetResponse(AppInfo, authCode, redirectUri, state);
+            var response = request.GetResponse(AppInfo, parameters);
 
             return DefaultGetAccessTokenResponseParser.Parse(response, now);
         }
 
-        public IUserInfo GetUserInfo(string accessToken, string userId)
+        public IUserInfo GetUserInfo(UserInfoRequestParameters parameters)
         {
-            return new SinaWeiboGetUserInfoRequest(_httpClient)
-            .GetResponse(AppInfo, accessToken);
+            return new SinaWeiboGetUserInfoRequest(_httpClient).GetResponse(AppInfo, parameters.AccessToken);
         }
     }
 }
