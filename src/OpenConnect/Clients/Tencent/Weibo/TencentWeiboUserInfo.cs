@@ -29,6 +29,10 @@ namespace OpenConnect.Clients.Tencent.Weibo
         [DataMember] int fansnum = 0;
         [DataMember] int idolnum = 0;
         [DataMember] int tweetnum = 0;
+        [DataMember] int favnum = 0;
+        [DataMember] int isrealname = 0;
+        [DataMember] long regtime = 0;
+        [DataMember] IList<TencentWeiboTag> tag = null;
 
         public string Id
         {
@@ -166,6 +170,30 @@ namespace OpenConnect.Clients.Tencent.Weibo
             }
         }
 
+        public int FavoriteTweetsCount
+        {
+            get
+            {
+                return favnum;
+            }
+        }
+
+        public bool IsVerified
+        {
+            get
+            {
+                return isrealname == 1;
+            }
+        }
+
+        public DateTime CreatedTime
+        {
+            get
+            {
+                return new DateTime(1970, 1, 1).AddSeconds(regtime);
+            }
+        }
+
         public DateTime? Birthday
         {
             get
@@ -179,6 +207,19 @@ namespace OpenConnect.Clients.Tencent.Weibo
             }
         }
 
+        public IList<TencentWeiboTag> Tags
+        {
+            get
+            {
+                if (tag == null)
+                {
+                    tag = new List<TencentWeiboTag>();
+                }
+
+                return tag;
+            }
+        }
+
         public TencentWeiboUserInfo()
         {
         }
@@ -187,5 +228,14 @@ namespace OpenConnect.Clients.Tencent.Weibo
         {
             return NickName;
         }
+    }
+
+    public class TencentWeiboTag
+    {
+        [DataMember(Name = "id")]
+        public string Id { get; set; }
+
+        [DataMember(Name = "name")]
+        public string Name { get; set; }
     }
 }
