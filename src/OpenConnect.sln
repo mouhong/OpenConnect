@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenConnect", "OpenConnect\OpenConnect.csproj", "{41E5E41F-C769-41E3-B36A-56A1369E9691}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenConnect.MvcExample", "OpenConnect.MvcExample\OpenConnect.MvcExample.csproj", "{15E7D3DE-99DF-4732-82BF-7EDA3A62134B}"
