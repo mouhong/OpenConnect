@@ -230,7 +230,7 @@ namespace OpenConnect.Clients.Tencent.Weibo
         }
     }
 
-    [DataContract]
+    [DataContract, Serializable]
     public class TencentWeiboTag
     {
         [DataMember(Name = "id")]
