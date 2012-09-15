@@ -178,7 +178,7 @@ namespace OpenConnect.Clients.Tencent.Weibo
             }
         }
 
-        public bool IsVerified
+        public bool IsRealNameVerified
         {
             get
             {
