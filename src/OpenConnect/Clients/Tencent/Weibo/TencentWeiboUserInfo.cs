@@ -78,7 +78,7 @@ namespace OpenConnect.Clients.Tencent.Weibo
         {
             get
             {
-                return sex == 0 ? Gender.Male : (sex == 2 ? Gender.Female : Gender.Unknown);
+                return sex == 1 ? Gender.Male : (sex == 2 ? Gender.Female : Gender.Unknown);
             }
         }
 
