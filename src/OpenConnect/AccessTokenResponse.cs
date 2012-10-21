@@ -17,7 +17,7 @@ namespace OpenConnect
 
         public string UserId { get; set; }
 
-        public string UserNickName { get; set; }
+        public string UserName { get; set; }
 
         public AccessTokenResponse(string token, DateTime expireTime, string refreshToken, DateTime? refershTokenExpireTime)
         {

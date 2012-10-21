@@ -12,8 +12,22 @@ namespace OpenConnect.Clients
         public static AccessTokenResponse Parse(string response, DateTime startRequestTime)
         {
             var result = (GetAccessTokenResult)JsonSerializer.Deserialize(response, typeof(GetAccessTokenResult));
+            var token = new AccessTokenResponse(result.access_token, startRequestTime.AddSeconds(result.expires_in), result.refresh_token, null)
+            {
+                UserId = result.uid,
+                UserName = result.name
+            };
 
-            return new AccessTokenResponse(result.access_token, startRequestTime.AddSeconds(result.expires_in), result.refresh_token, null);
+            if (!String.IsNullOrEmpty(result.taobao_user_id))
+            {
+                token.UserId = result.taobao_user_id;
+            }
+            if (!String.IsNullOrEmpty(result.taobao_user_nick))
+            {
+                token.UserName = result.taobao_user_nick;
+            }
+
+            return token;
         }
 
         [DataContract]
@@ -27,6 +41,18 @@ namespace OpenConnect.Clients
 
             [DataMember]
             public string refresh_token = null;
+
+            [DataMember]
+            public string uid = null;
+
+            [DataMember]
+            public string name = null;
+
+            [DataMember]
+            public string taobao_user_id = null;
+
+            [DataMember]
+            public string taobao_user_nick = null;
         }
     }
 }
