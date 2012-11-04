@@ -8,13 +8,17 @@ namespace OpenConnect.Clients.Tencent
 {
     class AccessTokenRequestResult
     {
-        private static readonly Regex _requestResultPattern = new Regex(@"^access_token=([^&]+)&expires_in=(\d+)(&refresh_token=([^&]+))?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex _requestResultPattern = new Regex(@"^access_token=(?<accessToken>[^&]+)&expires_in=(?<expiresIn>\d+)(&refresh_token=(?<refreshToken>[^&]+))?(&name=(?<name>[^$]+))?(&nick=(?<nick>[^$]+))", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public bool IsValid { get; private set; }
 
         public string Token { get; private set; }
 
         public string RefreshToken { get; private set; }
+
+        public string Name { get; set; }
+
+        public string Nick { get; set; }
 
         public int Expires { get; private set; }
 
@@ -36,13 +40,13 @@ namespace OpenConnect.Clients.Tencent
 
             if (match.Success)
             {
-                Token = match.Groups[1].Value;
-                Expires = Convert.ToInt32(match.Groups[2].Value);
+                Token = match.Groups["accessToken"].Value;
+                Expires = Convert.ToInt32(match.Groups["expiresIn"].Value);
 
-                if (match.Groups.Count > 4)
-                {
-                    RefreshToken = match.Groups[4].Value;
-                }
+                RefreshToken = match.Groups["refreshToken"].Value;
+
+                Name = match.Groups["name"].Value;
+                Nick = match.Groups["nick"].Value;
             }
         }
     }

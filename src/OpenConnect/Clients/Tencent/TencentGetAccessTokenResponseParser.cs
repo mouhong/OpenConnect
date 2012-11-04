@@ -15,7 +15,10 @@ namespace OpenConnect.Clients.Tencent
             if (!result.IsValid)
                 throw new ApiException("Invalid response when request access token: " + response + ".");
 
-            return new AccessTokenResponse(result.Token, startRequestTime.AddSeconds(result.Expires), result.RefreshToken, null);
+            return new AccessTokenResponse(result.Token, startRequestTime.AddSeconds(result.Expires), result.RefreshToken, null)
+            {
+                UserName = result.Name
+            };
         }
     }
 }
