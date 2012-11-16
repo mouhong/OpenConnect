@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,9 +9,13 @@ namespace OpenConnect.Clients.Tencent
 {
     class AccessTokenRequestResult
     {
-        private static readonly Regex _requestResultPattern = new Regex(@"^access_token=(?<accessToken>[^&]+)&expires_in=(?<expiresIn>\d+)(&refresh_token=(?<refreshToken>[^&]+))?(&name=(?<name>[^$]+))?(&nick=(?<nick>[^$]+))", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        public bool IsValid { get; private set; }
+        public bool IsValid
+        {
+            get
+            {
+                return !String.IsNullOrEmpty(Token);
+            }
+        }
 
         public string Token { get; private set; }
 
@@ -34,19 +39,28 @@ namespace OpenConnect.Clients.Tencent
 
         private void ParseInput(string tokenResult)
         {
-            var match = _requestResultPattern.Match(tokenResult);
+            var nv = new NameValueCollection();
 
-            IsValid = match.Success;
-
-            if (match.Success)
+            var keyValuePairs = tokenResult.Split('&');
+            
+            foreach (var keyValuePair in keyValuePairs)
             {
-                Token = match.Groups["accessToken"].Value;
-                Expires = Convert.ToInt32(match.Groups["expiresIn"].Value);
+                var parts = keyValuePair.Split('=');
+                if (parts.Length == 2)
+                {
+                    nv.Add(parts[0], parts[1]);
+                }
+            }
 
-                RefreshToken = match.Groups["refreshToken"].Value;
+            Token = nv["access_token"];
+            RefreshToken = nv["refresh_token"];
+            Name = nv["name"];
+            Nick = nv["nick"];
 
-                Name = match.Groups["name"].Value;
-                Nick = match.Groups["nick"].Value;
+            var expiresIn = nv["expires_in"];
+            if (!String.IsNullOrEmpty(expiresIn))
+            {
+                Expires = Convert.ToInt32(expiresIn);
             }
         }
     }
