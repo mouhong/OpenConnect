@@ -9,14 +9,18 @@ namespace OpenConnect.MvcExample.Controllers
 {
     public class LoginCallbackController : Controller
     {
-        public ActionResult Index(string clientName, string code, string openid = null)
+        public ActionResult Index(string clientName)
         {
-            var client = OpenConnectUtil.ClientManager.Find(clientName);
+            var account = OpenConnectAccounts.GetAccount(clientName);
+            var provider = (IOpenConnectProvider)Activator.CreateInstance(account.ProviderType);
 
             var state = Guid.NewGuid().ToString("N");
 
-            var token = client.GetAccessToken(new AccessTokenRequestParameters(code, "http://test.sigcms.com/LoginCallback?clientName=" + clientName));
-            var user = client.GetUserInfo(new UserInfoRequestParameters(token.AccessToken).WithOtherParameter("openid", openid));
+            var authResponse = provider.GetAuthorizationCallbackParser().Parse(Request);
+            var tokenResponse = provider.CreateAccessTokenRequest()
+                                        .GetAccessToken(new AccessTokenRequestParameters(account.AppInfo, authResponse, "http://test.sigcms.com/LoginCallback?clientName=" + clientName));
+            var user = provider.CreateUserInfoRequest()
+                               .GetUserInfo(new UserInfoRequestParameters(account.AppInfo, authResponse, tokenResponse));
 
             ViewBag.ClientName = clientName;
 

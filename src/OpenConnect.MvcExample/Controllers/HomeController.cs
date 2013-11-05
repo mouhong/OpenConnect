@@ -14,14 +14,16 @@ namespace OpenConnect.MvcExample.Controllers
         {
             var links = new List<LoginLink>();
 
-            foreach (var name in OpenConnectUtil.ClientManager.ClientNames)
+            foreach (var account in OpenConnectAccounts.Accounts)
             {
-                var client = OpenConnectUtil.ClientManager.Find(name);
+                var provider = (IOpenConnectProvider)Activator.CreateInstance(account.ProviderType);
+                var authUriBuilder = provider.GetAuthorizationUrlBuilder();
+                var authUrl = authUriBuilder.GetAuthorizationUri(new AuthorizationParameters(ResponseType.Code, "http://test.sigcms.com/LoginCallback?clientName=" + account.DisplayName), account.AppInfo);
 
                 var link = new LoginLink
                 {
-                    ImageUrl = "/Content/Images/connect-" + name.Replace(' ', '-') + ".png",
-                    NavigateUrl = client.GetAuthorizationUrl(new AuthorizationUrlParameters(ResponseType.Code, "http://test.sigcms.com/LoginCallback?clientName=" + name))
+                    ImageUrl = "/Content/Images/connect-" + account.DisplayName.Replace(' ', '-') + ".png",
+                    NavigateUrl = authUrl
                 };
 
                 links.Add(link);

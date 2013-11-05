@@ -7,26 +7,14 @@ namespace OpenConnect
 {
     public class AccessTokenResponse
     {
-        public string AccessToken { get; private set; }
+        public string AccessToken { get; set; }
 
-        public DateTime AccessTokenExpireTime { get; private set; }
+        public DateTime AccessTokenExpireTime { get; set; }
 
-        public string RefreshToken { get; private set; }
+        public string RefreshToken { get; set; }
 
-        public DateTime? RefreshTokenExpireTime { get; private set; }
+        public DateTime? RefreshTokenExpireTime { get; set; }
 
         public string UserId { get; set; }
-
-        public string UserName { get; set; }
-
-        public AccessTokenResponse(string token, DateTime expireTime, string refreshToken, DateTime? refershTokenExpireTime)
-        {
-            Require.NotNullOrEmpty(token, "token");
-
-            AccessToken = token;
-            AccessTokenExpireTime = expireTime;
-            RefreshToken = refreshToken;
-            RefreshTokenExpireTime = refershTokenExpireTime;
-        }
     }
 }
