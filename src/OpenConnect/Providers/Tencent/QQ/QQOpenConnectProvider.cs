@@ -6,38 +6,34 @@ using System.Text;
 
 namespace OpenConnect.Providers.Tencent.QQ
 {
-    public class QQOpenConnectProvider : IOpenConnectProvider
+    public class QQOpenConnectProvider : OpenConnectProviderBase
     {
-        private IHttpClient _httpClient;
+        protected override string ApiBasePath
+        {
+            get
+            {
+                return "https://graph.qq.com/oauth2.0/";
+            }
+        }
 
         public QQOpenConnectProvider()
-            : this(HttpClient.Instance)
+            : this(OpenConnect.Utils.HttpClient.Instance)
         {
         }
 
         public QQOpenConnectProvider(IHttpClient httpClient)
+            : base(httpClient)
         {
-            _httpClient = httpClient;
         }
 
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        protected override IAccessTokenRequest CreateAccessTokenRequest(AccessTokenRequestParameters parameters)
         {
-            return new AuthorizationUriBuilder("https://graph.qq.com/oauth2.0/authorize");
+            return new TencentAccessTokenRequest(UrlUtil.Combine(ApiBasePath, "token"), HttpClient);
         }
 
-        public IAuthorizationCallbackParser GetAuthorizationCallbackParser()
+        protected override IUserInfoRequest CreateUserInfoRequest(UserInfoRequestParameters parameters)
         {
-            return new AuthorizationCallbackParser();
-        }
-
-        public IAccessTokenRequest CreateAccessTokenRequest()
-        {
-            return new TencentAccessTokenRequest("https://graph.qq.com/oauth2.0/token", _httpClient);
-        }
-
-        public IUserInfoRequest CreateUserInfoRequest()
-        {
-            return new QQUserInfoRequest(_httpClient);
+            return new QQUserInfoRequest(HttpClient);
         }
     }
 }

@@ -7,6 +7,8 @@ namespace OpenConnect
 {
     public class AuthorizationParameters
     {
+        public AppInfo AppInfo { get; set; }
+
         public ResponseType ResponseType { get; set; }
 
         public string RedirectUri { get; set; }
@@ -15,8 +17,9 @@ namespace OpenConnect
 
         public string Display { get; set; }
 
-        public AuthorizationParameters(ResponseType responseType, string redirectUri)
+        public AuthorizationParameters(AppInfo appInfo, ResponseType responseType, string redirectUri)
         {
+            AppInfo = appInfo;
             ResponseType = responseType;
             RedirectUri = redirectUri;
         }

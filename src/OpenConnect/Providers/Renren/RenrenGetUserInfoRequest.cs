@@ -25,7 +25,7 @@ namespace OpenConnect.Providers.Renren
 
             var data = new NameValueCollection().FluentAdd("method", "users.getInfo")
                                                 .FluentAdd("v", "1.0")
-                                                .FluentAdd("access_token", parameters.AccessTokenResponse.AccessToken)
+                                                .FluentAdd("access_token", parameters.AccessTokenResult.AccessToken)
                                                 .FluentAdd("format", "json")
                                                 .FluentAdd("fields", "uid,name,sex,headurl");
 

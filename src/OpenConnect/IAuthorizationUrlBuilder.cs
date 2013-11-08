@@ -8,6 +8,6 @@ namespace OpenConnect
 {
     public interface IAuthorizationUrlBuilder
     {
-        string GetAuthorizationUri(AuthorizationParameters request, AppInfo appInfo);
+        string GetAuthorizationUrl(AuthorizationParameters request);
     }
 }

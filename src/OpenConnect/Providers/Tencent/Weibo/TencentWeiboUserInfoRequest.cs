@@ -22,10 +22,10 @@ namespace OpenConnect.Providers.Tencent.Weibo
         {
             var url = UrlBuilder.Create("https://open.t.qq.com/api/user/info")
                                 .WithParam("oauth_consumer_key", parameters.AppInfo.AppId)
-                                .WithParam("access_token", parameters.AccessTokenResponse.AccessToken)
+                                .WithParam("access_token", parameters.AccessTokenResult.AccessToken)
                                 .WithParam("scope", parameters.AppInfo.DefaultScope)
                                 .WithParam("oauth_version", "2.a")
-                                .WithParam("openid", parameters.AccessTokenResponse.UserId)
+                                .WithParam("openid", parameters.AccessTokenResult.UserId)
                                 .Build();
 
             var json = HttpClient.Get(url, null, Encoding.UTF8);

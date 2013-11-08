@@ -9,15 +9,19 @@ namespace OpenConnect
     {
         public AppInfo AppInfo { get; set; }
 
-        public AuthorizationResult AuthorizationResponse { get; set; }
+        public AuthorizationResult AuthorizationResult { get; set; }
 
-        public AccessTokenResponse AccessTokenResponse { get; set; }
+        public AccessTokenResult AccessTokenResult { get; set; }
 
-        public UserInfoRequestParameters(AppInfo appInfo, AuthorizationResult authorizationResponse, AccessTokenResponse accessTokenResponse)
+        public UserInfoRequestParameters(AppInfo appInfo, AuthorizationResult authorizationResult, AccessTokenResult accessTokenResult)
         {
+            Require.NotNull(appInfo, "appInfo");
+            Require.NotNull(authorizationResult, "authorizationResult");
+            Require.NotNull(accessTokenResult, "accessTokenResult");
+
             AppInfo = appInfo;
-            AuthorizationResponse = authorizationResponse;
-            AccessTokenResponse = accessTokenResponse;
+            AuthorizationResult = authorizationResult;
+            AccessTokenResult = accessTokenResult;
         }
     }
 }

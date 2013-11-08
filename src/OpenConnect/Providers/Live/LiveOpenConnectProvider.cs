@@ -3,41 +3,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace OpenConnect.Providers.Live
 {
-    public class LiveOpenConnectProvider : IOpenConnectProvider
+    public class LiveOpenConnectProvider : OpenConnectProviderBase
     {
-        private IHttpClient _httpClient;
+        protected override string ApiBasePath
+        {
+            get
+            {
+                return "https://oauth.live.com/";
+            }
+        }
 
         public LiveOpenConnectProvider()
-            : this(HttpClient.Instance)
+            : this(OpenConnect.Utils.HttpClient.Instance)
         {
         }
 
         public LiveOpenConnectProvider(IHttpClient httpClient)
+            : base(httpClient)
         {
-            _httpClient = httpClient;
         }
 
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        protected override IUserInfoRequest CreateUserInfoRequest(UserInfoRequestParameters parameters)
         {
-            return new AuthorizationUriBuilder("https://oauth.live.com/authorize");
-        }
-
-        public IAuthorizationCallbackParser GetAuthorizationCallbackParser()
-        {
-            return new AuthorizationCallbackParser();
-        }
-
-        public IAccessTokenRequest CreateAccessTokenRequest()
-        {
-            return new AccessTokenRequest("https://oauth.live.com/token", _httpClient);
-        }
-
-        public IUserInfoRequest CreateUserInfoRequest()
-        {
-            return new LiveUserInfoRequest(_httpClient);
+            return new LiveUserInfoRequest(HttpClient);
         }
     }
 }

@@ -6,38 +6,34 @@ using System.Text;
 
 namespace OpenConnect.Providers.Tencent.Weibo
 {
-    public class TencentWeiboOpenConnectProvider : IOpenConnectProvider
+    public class TencentWeiboOpenConnectProvider : OpenConnectProviderBase
     {
-        private IHttpClient _httpClient;
+        protected override string ApiBasePath
+        {
+            get
+            {
+                return "https://open.t.qq.com/cgi-bin/oauth2/";
+            }
+        }
 
         public TencentWeiboOpenConnectProvider()
-            : this(HttpClient.Instance)
+            : this(OpenConnect.Utils.HttpClient.Instance)
         {
         }
 
         public TencentWeiboOpenConnectProvider(IHttpClient httpClient)
+            : base(httpClient)
         {
-            _httpClient = httpClient;
         }
 
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        protected override IAccessTokenRequest CreateAccessTokenRequest(AccessTokenRequestParameters parameters)
         {
-            return new AuthorizationUriBuilder("https://open.t.qq.com/cgi-bin/oauth2/authorize");
+            return new TencentAccessTokenRequest(UrlUtil.Combine(ApiBasePath, "access_token"), HttpClient);
         }
 
-        public IAuthorizationCallbackParser GetAuthorizationCallbackParser()
+        protected override IUserInfoRequest CreateUserInfoRequest(UserInfoRequestParameters parameters)
         {
-            return new AuthorizationCallbackParser();
-        }
-
-        public IAccessTokenRequest CreateAccessTokenRequest()
-        {
-            return new TencentAccessTokenRequest("https://open.t.qq.com/cgi-bin/oauth2/access_token", _httpClient);
-        }
-
-        public IUserInfoRequest CreateUserInfoRequest()
-        {
-            return new TencentWeiboUserInfoRequest(_httpClient);
+            return new TencentWeiboUserInfoRequest(HttpClient);
         }
     }
 }

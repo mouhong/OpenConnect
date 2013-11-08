@@ -20,7 +20,7 @@ namespace OpenConnect
             HttpClient = httpClient;
         }
 
-        public virtual AccessTokenResponse GetAccessToken(AccessTokenRequestParameters parameters)
+        public virtual AccessTokenResult GetAccessToken(AccessTokenRequestParameters parameters)
         {
             var data = new NameValueCollection().FluentAdd("client_id", parameters.AppInfo.AppId)
                                                 .FluentAdd("client_secret", parameters.AppInfo.AppSecret)
@@ -43,10 +43,10 @@ namespace OpenConnect
             return ParseAccessTokenResponse(responseText, parameters);
         }
 
-        protected virtual AccessTokenResponse ParseAccessTokenResponse(string responseText, AccessTokenRequestParameters request)
+        protected virtual AccessTokenResult ParseAccessTokenResponse(string responseText, AccessTokenRequestParameters request)
         {
             var result = (AccessTokenApiResult)JsonSerializer.Deserialize(responseText, typeof(AccessTokenApiResult));
-            var token = new AccessTokenResponse
+            var token = new AccessTokenResult
             {
                 AccessToken = result.access_token,
                 AccessTokenExpireTime = DateTime.Now.AddSeconds(result.expires_in),

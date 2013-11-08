@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OpenConnect
 {
-    public class AuthorizationUriBuilder : IAuthorizationUrlBuilder
+    public class AuthorizationUrlBuilder : IAuthorizationUrlBuilder
     {
         public string ApiPath { get; set; }
 
@@ -20,7 +20,7 @@ namespace OpenConnect
 
         public string DisplayParamName { get; set; }
 
-        public AuthorizationUriBuilder(string apiPath)
+        public AuthorizationUrlBuilder(string apiPath)
         {
             ApiPath = apiPath;
             ResponseTypeParamName = "response_type";
@@ -30,19 +30,19 @@ namespace OpenConnect
             DisplayParamName = "display";
         }
 
-        public string GetAuthorizationUri(AuthorizationParameters parameters, AppInfo appInfo)
+        public string GetAuthorizationUrl(AuthorizationParameters parameters)
         {
             var builder = UrlBuilder.Create(ApiPath);
-            SetupUriParameters(builder, parameters, appInfo);
+            SetupUriParameters(builder, parameters);
             return builder.Build();
         }
 
-        protected virtual void SetupUriParameters(UrlBuilder builder, AuthorizationParameters parameters, AppInfo appInfo)
+        protected virtual void SetupUriParameters(UrlBuilder builder, AuthorizationParameters parameters)
         {
             builder.WithParam(ResponseTypeParamName, parameters.ResponseType == ResponseType.Code ? "code" : "token")
-                   .WithParam(ClientIdParamName, appInfo.AppId)
+                   .WithParam(ClientIdParamName, parameters.AppInfo.AppId)
                    .WithParam(RedirectUriParamName, parameters.RedirectUri)
-                   .WithParam(ScopeParamName, String.IsNullOrEmpty(parameters.Scope) ? appInfo.DefaultScope : parameters.Scope)
+                   .WithParam(ScopeParamName, String.IsNullOrEmpty(parameters.Scope) ? parameters.AppInfo.DefaultScope : parameters.Scope)
                    .WithParam(DisplayParamName, parameters.Display);
         }
     }

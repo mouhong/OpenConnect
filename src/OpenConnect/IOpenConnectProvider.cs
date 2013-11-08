@@ -3,17 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace OpenConnect
 {
     public interface IOpenConnectProvider
     {
-        IAuthorizationUrlBuilder GetAuthorizationUrlBuilder();
+        string GetAuthorizationUrl(AuthorizationParameters parameters);
 
-        IAuthorizationCallbackParser GetAuthorizationCallbackParser();
+        AuthorizationResult ParseAuthorizationCallback(HttpRequestBase callbackRequest);
 
-        IAccessTokenRequest CreateAccessTokenRequest();
+        AccessTokenResult GetAccessToken(AccessTokenRequestParameters parameters);
 
-        IUserInfoRequest CreateUserInfoRequest();
+        IUserInfo GetUserInfo(UserInfoRequestParameters parameters);
     }
 }

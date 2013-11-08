@@ -6,38 +6,29 @@ using System.Text;
 
 namespace OpenConnect.Providers.Renren
 {
-    public class RenrenOpenConnectProvider : IOpenConnectProvider
+    public class RenrenOpenConnectProvider : OpenConnectProviderBase
     {
-        private IHttpClient _httpClient;
+        protected override string ApiBasePath
+        {
+            get
+            {
+                return "https://graph.renren.com/oauth/";
+            }
+        }
 
         public RenrenOpenConnectProvider()
-            : this(HttpClient.Instance)
+            : this(OpenConnect.Utils.HttpClient.Instance)
         {
         }
 
         public RenrenOpenConnectProvider(IHttpClient httpClient)
+            : base(httpClient)
         {
-            _httpClient = httpClient;
         }
 
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        protected override IUserInfoRequest CreateUserInfoRequest(UserInfoRequestParameters parameters)
         {
-            return new AuthorizationUriBuilder("https://graph.renren.com/oauth/authorize");
-        }
-
-        public IAuthorizationCallbackParser GetAuthorizationCallbackParser()
-        {
-            return new AuthorizationCallbackParser();
-        }
-
-        public IAccessTokenRequest CreateAccessTokenRequest()
-        {
-            return new AccessTokenRequest("https://graph.renren.com/oauth/token", _httpClient);
-        }
-
-        public IUserInfoRequest CreateUserInfoRequest()
-        {
-            return new RenrenUserInfoRequest(_httpClient);
+            return new RenrenUserInfoRequest(HttpClient);
         }
     }
 }

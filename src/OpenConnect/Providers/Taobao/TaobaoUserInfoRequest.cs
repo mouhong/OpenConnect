@@ -42,7 +42,7 @@ namespace OpenConnect.Providers.Taobao
                                     .FluentAdd("sign_method", "md5")
                                     .FluentAdd("timestamp", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
                                     .FluentAdd("v", "2.0")
-                                    .FluentAdd("session", parameters.AccessTokenResponse.AccessToken)
+                                    .FluentAdd("session", parameters.AccessTokenResult.AccessToken)
                                     .FluentAdd("app_key", parameters.AppInfo.AppId)
                                     .FluentAdd("fields", FieldsToGet);
 

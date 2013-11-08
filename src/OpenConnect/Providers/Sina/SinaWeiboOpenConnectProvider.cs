@@ -6,43 +6,37 @@ using System.Text;
 
 namespace OpenConnect.Providers.Sina
 {
-    public class SinaWeiboOpenConnectProvider : IOpenConnectProvider
+    public class SinaWeiboOpenConnectProvider : OpenConnectProviderBase
     {
-        private IHttpClient _httpClient;
-
-        public bool UseSandbox { get; set; }
+        protected override string ApiBasePath
+        {
+            get
+            {
+                return "https://api.weibo.com/oauth2/";
+            }
+        }
 
         public SinaWeiboOpenConnectProvider()
-            : this(HttpClient.Instance)
+            : this(OpenConnect.Utils.HttpClient.Instance)
         {
         }
 
         public SinaWeiboOpenConnectProvider(IHttpClient httpClient)
+            : base(httpClient)
         {
-            _httpClient = httpClient;
         }
 
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        protected override IAccessTokenRequest CreateAccessTokenRequest(AccessTokenRequestParameters parameters)
         {
-            return new AuthorizationUriBuilder("https://api.weibo.com/oauth2/authorize");
-        }
-
-        public IAuthorizationCallbackParser GetAuthorizationCallbackParser()
-        {
-            return new AuthorizationCallbackParser();
-        }
-
-        public IAccessTokenRequest CreateAccessTokenRequest()
-        {
-            return new AccessTokenRequest("https://api.weibo.com/oauth2/access_token", _httpClient)
+            return new AccessTokenRequest(UrlUtil.Combine(ApiBasePath, "access_token"), HttpClient)
             {
                 Method = HttpMethod.Post
             };
         }
 
-        public IUserInfoRequest CreateUserInfoRequest()
+        protected override IUserInfoRequest CreateUserInfoRequest(UserInfoRequestParameters parameters)
         {
-            return new SinaWeiboUserInfoRequest(_httpClient);
+            return new SinaWeiboUserInfoRequest(HttpClient);
         }
     }
 }

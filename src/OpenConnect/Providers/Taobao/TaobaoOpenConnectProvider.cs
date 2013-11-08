@@ -6,13 +6,11 @@ using System.Text;
 
 namespace OpenConnect.Providers.Taobao
 {
-    public class TaobaoOpenConnectProvider : IOpenConnectProvider
+    public class TaobaoOpenConnectProvider : OpenConnectProviderBase
     {
-        private IHttpClient _httpClient;
-
         public bool UseSandbox { get; set; }
 
-        public string BaseApiUri
+        protected override string ApiBasePath
         {
             get
             {
@@ -26,33 +24,23 @@ namespace OpenConnect.Providers.Taobao
         }
 
         public TaobaoOpenConnectProvider()
-            : this(HttpClient.Instance)
+            : this(OpenConnect.Utils.HttpClient.Instance)
         {
         }
 
         public TaobaoOpenConnectProvider(IHttpClient httpClient)
+            : base(httpClient)
         {
-            _httpClient = httpClient;
         }
 
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        protected override IAccessTokenRequest CreateAccessTokenRequest(AccessTokenRequestParameters parameters)
         {
-            return new AuthorizationUriBuilder(BaseApiUri + "authorize");
+            return new TaobaoAccessTokenRequest(ApiBasePath, HttpClient);
         }
 
-        public IAuthorizationCallbackParser GetAuthorizationCallbackParser()
+        protected override IUserInfoRequest CreateUserInfoRequest(UserInfoRequestParameters parameters)
         {
-            return new AuthorizationCallbackParser();
-        }
-
-        public IAccessTokenRequest CreateAccessTokenRequest()
-        {
-            return new TaobaoAccessTokenRequest(BaseApiUri, _httpClient);
-        }
-
-        public IUserInfoRequest CreateUserInfoRequest()
-        {
-            return new TaobaoUserInfoRequest(UseSandbox, _httpClient);
+            return new TaobaoUserInfoRequest(UseSandbox, HttpClient);
         }
     }
 }

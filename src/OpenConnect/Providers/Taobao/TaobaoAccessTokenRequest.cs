@@ -15,7 +15,7 @@ namespace OpenConnect.Providers.Taobao
             Method = HttpMethod.Post;
         }
         
-        protected override AccessTokenResponse ParseAccessTokenResponse(string responseText, AccessTokenRequestParameters request)
+        protected override AccessTokenResult ParseAccessTokenResponse(string responseText, AccessTokenRequestParameters request)
         {
             var result = (ApiResponse)JsonSerializer.Deserialize(responseText, typeof(ApiResponse));
 

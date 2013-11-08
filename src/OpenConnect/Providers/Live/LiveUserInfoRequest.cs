@@ -21,7 +21,7 @@ namespace OpenConnect.Providers.Live
         public IUserInfo GetUserInfo(UserInfoRequestParameters parameters)
         {
             var url = UrlBuilder.Create("https://apis.live.net/v5.0/me")
-                                .WithParam("access_token", parameters.AccessTokenResponse.AccessToken)
+                                .WithParam("access_token", parameters.AccessTokenResult.AccessToken)
                                 .Build();
 
             var json = HttpClient.Get(url, null, Encoding.UTF8);

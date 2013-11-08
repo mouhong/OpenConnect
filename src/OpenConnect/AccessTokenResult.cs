@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OpenConnect
 {
-    public class AccessTokenResponse
+    public class AccessTokenResult
     {
         public string AccessToken { get; set; }
 

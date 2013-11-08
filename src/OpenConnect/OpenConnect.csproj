@@ -45,7 +45,8 @@
     <Compile Include="AuthorizationCallbackParser.cs" />
     <Compile Include="AuthorizationResult.cs" />
     <Compile Include="AuthorizationParameters.cs" />
-    <Compile Include="AuthorizationUriBuilder.cs" />
+    <Compile Include="AuthorizationUrlBuilder.cs" />
+    <Compile Include="OpenConnectProviderBase.cs" />
     <Compile Include="Providers\Google\GoogleAccessTokenRequest.cs" />
     <Compile Include="Providers\Google\GoogleOpenConnectProvider.cs" />
     <Compile Include="Providers\Live\LiveOpenConnectProvider.cs" />
@@ -63,7 +64,7 @@
     <Compile Include="IAuthorizationUrlBuilder.cs" />
     <Compile Include="IUserInfoRequest.cs" />
     <Compile Include="IOpenConnectProvider.cs" />
-    <Compile Include="AccessTokenResponse.cs" />
+    <Compile Include="AccessTokenResult.cs" />
     <Compile Include="Providers\Google\GoogleUserInfo.cs" />
     <Compile Include="Providers\Renren\RenrenApiUtil.cs" />
     <Compile Include="Providers\Renren\RenrenGetUserInfoRequest.cs" />

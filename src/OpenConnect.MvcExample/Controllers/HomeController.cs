@@ -17,8 +17,8 @@ namespace OpenConnect.MvcExample.Controllers
             foreach (var account in OpenConnectAccounts.Accounts)
             {
                 var provider = (IOpenConnectProvider)Activator.CreateInstance(account.ProviderType);
-                var authUriBuilder = provider.GetAuthorizationUrlBuilder();
-                var authUrl = authUriBuilder.GetAuthorizationUri(new AuthorizationParameters(ResponseType.Code, "http://test.sigcms.com/LoginCallback?clientName=" + account.DisplayName), account.AppInfo);
+                var authUrl = provider.GetAuthorizationUrl(
+                    new AuthorizationParameters(account.AppInfo, ResponseType.Code, "http://test.sigcms.com/LoginCallback?clientName=" + account.DisplayName));
 
                 var link = new LoginLink
                 {

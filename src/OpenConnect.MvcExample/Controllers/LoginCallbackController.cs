@@ -16,11 +16,9 @@ namespace OpenConnect.MvcExample.Controllers
 
             var state = Guid.NewGuid().ToString("N");
 
-            var authResponse = provider.GetAuthorizationCallbackParser().Parse(Request);
-            var tokenResponse = provider.CreateAccessTokenRequest()
-                                        .GetAccessToken(new AccessTokenRequestParameters(account.AppInfo, authResponse, "http://test.sigcms.com/LoginCallback?clientName=" + clientName));
-            var user = provider.CreateUserInfoRequest()
-                               .GetUserInfo(new UserInfoRequestParameters(account.AppInfo, authResponse, tokenResponse));
+            var authResponse = provider.ParseAuthorizationCallback(Request);
+            var tokenResponse = provider.GetAccessToken(new AccessTokenRequestParameters(account.AppInfo, authResponse, "http://test.sigcms.com/LoginCallback?clientName=" + clientName));
+            var user = provider.GetUserInfo(new UserInfoRequestParameters(account.AppInfo, authResponse, tokenResponse));
 
             ViewBag.ClientName = clientName;
 

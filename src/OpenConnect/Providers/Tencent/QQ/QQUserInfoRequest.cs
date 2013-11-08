@@ -22,7 +22,7 @@ namespace OpenConnect.Providers.Tencent.QQ
         public IUserInfo GetUserInfo(UserInfoRequestParameters parameters)
         {
             var userInfo = GetUserInfoByUserIdentity(
-                parameters.AppInfo, parameters.AccessTokenResponse.AccessToken, GetUserIdentity(parameters.AccessTokenResponse.AccessToken));
+                parameters.AppInfo, parameters.AccessTokenResult.AccessToken, GetUserIdentity(parameters.AccessTokenResult.AccessToken));
 
             return userInfo;
         }

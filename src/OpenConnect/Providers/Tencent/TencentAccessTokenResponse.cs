@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OpenConnect.Providers.Tencent
 {
-    public class TencentAccessTokenResponse : AccessTokenResponse
+    public class TencentAccessTokenResponse : AccessTokenResult
     {
         public string UserName { get; set; }
     }

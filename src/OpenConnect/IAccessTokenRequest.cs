@@ -10,6 +10,6 @@ namespace OpenConnect
 {
     public interface IAccessTokenRequest
     {
-        AccessTokenResponse GetAccessToken(AccessTokenRequestParameters parameters);
+        AccessTokenResult GetAccessToken(AccessTokenRequestParameters parameters);
     }
 }

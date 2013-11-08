@@ -22,7 +22,7 @@ namespace OpenConnect.Providers.Google
         {
             var url = UrlBuilder.Create("https://www.googleapis.com/oauth2/v1/userinfo")
                                 .WithParam("alt", "json")
-                                .WithParam("access_token", parameters.AccessTokenResponse.AccessToken)
+                                .WithParam("access_token", parameters.AccessTokenResult.AccessToken)
                                 .Build();
 
             var json = HttpClient.Get(url, null, Encoding.UTF8);

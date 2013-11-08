@@ -21,8 +21,8 @@ namespace OpenConnect.Providers.Sina
 
         public IUserInfo GetUserInfo(UserInfoRequestParameters parameters)
         {
-            var userId = GetUID(parameters.AccessTokenResponse.AccessToken);
-            var userInfo = GetUserInfoByUserIdentity(parameters.AccessTokenResponse.AccessToken, userId);
+            var userId = GetUID(parameters.AccessTokenResult.AccessToken);
+            var userInfo = GetUserInfoByUserIdentity(parameters.AccessTokenResult.AccessToken, userId);
 
             return userInfo;
         }

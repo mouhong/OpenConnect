@@ -13,7 +13,7 @@ namespace OpenConnect.Providers.Tencent
         {
         }
 
-        protected override AccessTokenResponse ParseAccessTokenResponse(string responseText, AccessTokenRequestParameters request)
+        protected override AccessTokenResult ParseAccessTokenResponse(string responseText, AccessTokenRequestParameters request)
         {
             var result = AccessTokenRequestResult.Parse(responseText);
 

@@ -13,7 +13,7 @@ namespace OpenConnect.Providers.Google
         {
         }
 
-        public override AccessTokenResponse GetAccessToken(AccessTokenRequestParameters parameters)
+        public override AccessTokenResult GetAccessToken(AccessTokenRequestParameters parameters)
         {
             // state must be null in google
             parameters.State = null;

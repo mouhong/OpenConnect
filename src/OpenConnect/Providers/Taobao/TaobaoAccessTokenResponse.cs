@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OpenConnect.Providers.Taobao
 {
-    public class TaobaoAccessTokenResponse : AccessTokenResponse
+    public class TaobaoAccessTokenResponse : AccessTokenResult
     {
         public string UserNick { get; set; }
     }

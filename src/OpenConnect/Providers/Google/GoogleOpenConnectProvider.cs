@@ -3,43 +3,45 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace OpenConnect.Providers.Google
 {
-    public class GoogleOpenConnectProvider : IOpenConnectProvider
+    public class GoogleOpenConnectProvider : OpenConnectProviderBase
     {
-        private IHttpClient _httpClient;
+        protected override string ApiBasePath
+        {
+            get
+            {
+                return "https://accounts.google.com/o/oauth2/";
+            }
+        }
 
         public GoogleOpenConnectProvider()
-            : this(HttpClient.Instance)
+            : this(OpenConnect.Utils.HttpClient.Instance)
         {
         }
 
         public GoogleOpenConnectProvider(IHttpClient httpClient)
+            : base(httpClient)
         {
-            _httpClient = httpClient;
         }
 
-        public IAuthorizationUrlBuilder GetAuthorizationUrlBuilder()
+        protected override AuthorizationUrlBuilder GetAuthorizationUrlBuilder(AuthorizationParameters parameters)
         {
-            var builder = new AuthorizationUriBuilder("https://accounts.google.com/o/oauth2/auth");
+            var builder = new AuthorizationUrlBuilder("https://accounts.google.com/o/oauth2/auth");
             builder.DisplayParamName = "approval_prompt";
             return builder;
         }
 
-        public IAuthorizationCallbackParser GetAuthorizationCallbackParser()
+        protected override IAccessTokenRequest CreateAccessTokenRequest(AccessTokenRequestParameters parameters)
         {
-            return new AuthorizationCallbackParser();
+            return new GoogleAccessTokenRequest(HttpClient);
         }
 
-        public IAccessTokenRequest CreateAccessTokenRequest()
+        protected override IUserInfoRequest CreateUserInfoRequest(UserInfoRequestParameters parameters)
         {
-            return new GoogleAccessTokenRequest(_httpClient);
-        }
-
-        public IUserInfoRequest CreateUserInfoRequest()
-        {
-            return new GoogleUserInfoRequest(_httpClient);
+            return new GoogleUserInfoRequest(HttpClient);
         }
     }
 }
