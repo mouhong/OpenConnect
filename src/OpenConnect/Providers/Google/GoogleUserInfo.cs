@@ -66,7 +66,7 @@ namespace OpenConnect.Providers.Google
             }
         }
 
-        public string HeadImageUrl
+        public string Avatar
         {
             get
             {

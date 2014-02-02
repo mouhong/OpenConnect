@@ -58,7 +58,7 @@ namespace OpenConnect.Providers.Tencent.Weibo
             }
         }
 
-        public string HeadImageUrl
+        public string Avatar
         {
             get
             {

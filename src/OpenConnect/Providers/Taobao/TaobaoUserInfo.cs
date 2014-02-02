@@ -79,7 +79,7 @@ namespace OpenConnect.Providers.Taobao
             }
         }
 
-        public string HeadImageUrl
+        public string Avatar
         {
             get
             {

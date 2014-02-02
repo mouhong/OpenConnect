@@ -10,7 +10,7 @@ namespace OpenConnect.Providers.Tencent.QQ
     public class QQUserInfo : IUserInfo
     {
         [DataMember] string nickname = null;
-        [DataMember] string figureurl = null;
+        [DataMember] string figureurl_2 = null;
         [DataMember] string gender = null;
 
         [IgnoreDataMember]
@@ -24,11 +24,11 @@ namespace OpenConnect.Providers.Tencent.QQ
             }
         }
 
-        public string HeadImageUrl
+        public string Avatar
         {
             get
             {
-                return figureurl;
+                return figureurl_2;
             }
         }
 

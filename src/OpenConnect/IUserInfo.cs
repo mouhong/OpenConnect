@@ -14,7 +14,7 @@ namespace OpenConnect
 
         string Email { get; }
 
-        string HeadImageUrl { get; }
+        string Avatar { get; }
 
         Gender Gender { get; }
     }

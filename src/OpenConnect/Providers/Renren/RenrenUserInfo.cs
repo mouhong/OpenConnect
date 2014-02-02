@@ -38,7 +38,7 @@ namespace OpenConnect.Providers.Renren
             }
         }
 
-        public string HeadImageUrl
+        public string Avatar
         {
             get
             {

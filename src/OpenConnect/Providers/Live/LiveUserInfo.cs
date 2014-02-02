@@ -60,7 +60,7 @@ namespace OpenConnect.Providers.Live
             }
         }
 
-        public string HeadImageUrl
+        public string Avatar
         {
             get
             {

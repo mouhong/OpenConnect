@@ -95,7 +95,7 @@ namespace OpenConnect.Providers.Sina
             }
         }
 
-        public string HeadImageUrl
+        public string Avatar
         {
             get
             {
