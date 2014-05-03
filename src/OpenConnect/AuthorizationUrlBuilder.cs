@@ -18,6 +18,8 @@ namespace OpenConnect
 
         public string ScopeParamName { get; set; }
 
+        public string StateParamName { get; set; }
+
         public string DisplayParamName { get; set; }
 
         public AuthorizationUrlBuilder(string apiPath)
@@ -27,6 +29,7 @@ namespace OpenConnect
             ClientIdParamName = "client_id";
             RedirectUriParamName = "redirect_uri";
             ScopeParamName = "scope";
+            StateParamName = "state";
             DisplayParamName = "display";
         }
 
@@ -44,6 +47,11 @@ namespace OpenConnect
                    .WithParam(RedirectUriParamName, parameters.RedirectUri)
                    .WithParam(ScopeParamName, String.IsNullOrEmpty(parameters.Scope) ? parameters.AppInfo.DefaultScope : parameters.Scope)
                    .WithParam(DisplayParamName, parameters.Display);
+
+            if (!String.IsNullOrEmpty(parameters.State))
+            {
+                builder.WithParam(StateParamName, parameters.State);
+            }
         }
     }
 }

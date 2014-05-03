@@ -15,6 +15,8 @@ namespace OpenConnect
 
         public string Scope { get; set; }
 
+        public string State { get; set; }
+
         public string Display { get; set; }
 
         public AuthorizationParameters(AppInfo appInfo, ResponseType responseType, string redirectUri)
